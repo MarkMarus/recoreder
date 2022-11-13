@@ -24,6 +24,9 @@ class PageSaver:
         code = code.replace('SET_PERCENT', '0.8%')
         code = code.replace('SET_AVATAR', 'imgs/avatar.png')
         code = code.replace('SET_PAYMENTS', '0')
+        code = code.replace('SET_FANS', '10k')
+        code = code.replace('SET_PROFILE_NAME', self.profile_name)
+        code = code.replace('SET_USER_NAME', self.user_name)
         with open('localhost/Statements.html', 'w+', encoding='utf8') as f:
             f.write(code)
 
@@ -32,6 +35,9 @@ class PageSaver:
             code = f.read()
         code = code.replace('PASTE_CHATS', self.chats)
         code = code.replace('SET_AVATAR', 'imgs/avatar.png')
+        code = code.replace('SET_FANS', '10k')
+        code = code.replace('SET_PROFILE_NAME', self.profile_name)
+        code = code.replace('SET_USER_NAME', self.user_name)
         with open('localhost/Messages.html', 'w+', encoding='utf8') as f:
             f.write(code)
 
@@ -54,8 +60,11 @@ class PageSaver:
     def save_send(self):
         with open('HTML/Select users to send them a message - OnlyFans.html', encoding='utf8') as f:
             code = f.read()
-        code = code.replace('SET_FANS', '1337')
+        code = code.replace('SET_FANS_FULL', '1337')
         code = code.replace('SET_AVATAR', 'imgs/avatar.png')
+        code = code.replace('SET_FANS', '10k')
+        code = code.replace('SET_PROFILE_NAME', self.profile_name)
+        code = code.replace('SET_USER_NAME', self.user_name)
         with open('localhost/Send.html', 'w+', encoding='utf8') as f:
             f.write(code)
 
