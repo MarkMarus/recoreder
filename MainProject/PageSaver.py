@@ -22,17 +22,17 @@ class PageSaver:
         code = code.replace('SET_MAIN_BALANCE', '$1,234.56')
         code = code.replace('SET_PENDING_BALANCE', '$8,910.11')
         code = code.replace('SET_PERCENT', '0.8%')
-        code = code.replace('SET_AVATAR', 'avatar.png')
+        code = code.replace('SET_AVATAR', 'imgs/avatar.png')
         code = code.replace('SET_PAYMENTS', '0')
-        with open('Statements.html', 'w+', encoding='utf8') as f:
+        with open('localhost/Statements.html', 'w+', encoding='utf8') as f:
             f.write(code)
 
     def save_chats(self):
         with open('HTML/Messages - OnlyFans.html', encoding='utf8') as f:
             code = f.read()
         code = code.replace('PASTE_CHATS', self.chats)
-        code = code.replace('SET_AVATAR', 'avatar.png')
-        with open('Messages.html', 'w+', encoding='utf8') as f:
+        code = code.replace('SET_AVATAR', 'imgs/avatar.png')
+        with open('localhost/Messages.html', 'w+', encoding='utf8') as f:
             f.write(code)
 
     def save_profile(self):
@@ -45,18 +45,18 @@ class PageSaver:
         code = code.replace('SET_LIKES', self.likes_value)
         code = code.replace('SET_FANS', '10K')
         code = code.replace('SET_INFO_TEXT', self.info_text)
-        code = code.replace('SET_BANNER', 'banner.png')
-        code = code.replace('SET_AVATAR', 'avatar.png')
-        code = code.replace('SET_STORY_IMAGE', 'story.png')
-        with open('Profile.html', 'w+', encoding='utf8') as f:
+        code = code.replace('SET_BANNER', 'imgs/banner.png')
+        code = code.replace('SET_AVATAR', 'imgs/avatar.png')
+        code = code.replace('SET_STORY_IMAGE', 'imgs/story.png')
+        with open('localhost/Profile.html', 'w+', encoding='utf8') as f:
             f.write(code)
 
     def save_send(self):
         with open('HTML/Select users to send them a message - OnlyFans.html', encoding='utf8') as f:
             code = f.read()
         code = code.replace('SET_FANS', '1337')
-        code = code.replace('SET_AVATAR', 'avatar.png')
-        with open('Send.html', 'w+', encoding='utf8') as f:
+        code = code.replace('SET_AVATAR', 'imgs/avatar.png')
+        with open('localhost/Send.html', 'w+', encoding='utf8') as f:
             f.write(code)
 
     def get_chats(self):
@@ -100,7 +100,7 @@ class PageSaver:
         story = self.driver.execute_script("""
             return document.querySelectorAll("[class='b-story-item__inside m-default-bg']")[0].getElementsByTagName('img')[1].getAttribute('src');
         """)
-        urlretrieve(avatar, 'avatar.png')
-        urlretrieve(banner, 'banner.png')
+        urlretrieve(avatar, 'localhost/imgs/avatar.png')
+        urlretrieve(banner, 'localhost/imgs/banner.png')
         self.driver.get(story)
-        self.driver.find_element(By.TAG_NAME, "img").screenshot('story.png')
+        self.driver.find_element(By.TAG_NAME, "img").screenshot('localhost/imgs/story.png')

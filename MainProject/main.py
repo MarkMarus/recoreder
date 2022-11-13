@@ -1,6 +1,5 @@
 import configparser
 import os
-import time
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 
@@ -19,6 +18,8 @@ class Worker:
         options.add_experimental_option("debuggerAddress", f"127.0.0.1:{port}")
         self.driver = webdriver.Chrome(service=Service('chromedriver.exe'), options=options)
         PageSaver(self.driver)
+        self.dolphin.stop_profile(profile_id)
+        os.system('python -m http.server 1337')
 
 if __name__ == "__main__":
     Worker()
