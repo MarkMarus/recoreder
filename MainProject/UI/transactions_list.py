@@ -9,12 +9,15 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+import pandas as pd
+import csv
 
 class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
+    def setupUi(self, MainWindow, profile_id: str):
+        self.to_close = False
+        self.profile_id = profile_id
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(508, 375)
+        MainWindow.setFixedSize(508, 375)
         MainWindow.setStyleSheet("QMainWindow {\n"
                                  "background: white;\n"
                                  "}\n"
@@ -42,6 +45,48 @@ class Ui_MainWindow(object):
         font.setPointSize(14)
         self.pushButton.setFont(font)
         self.pushButton.setObjectName("pushButton")
+        data = pd.read_csv('./data/transactions.csv')
+        transactions = data.loc[data['ID'] == int(self.profile_id)]
+        self.id = [transactions.iloc[i]['ID'] for i in range(len(transactions))]
+        self.name = [transactions.iloc[i]['Name'] for i in range(len(transactions))]
+        self.sum = [transactions.iloc[i]['Sum'] for i in range(len(transactions))]
+        self.date = [transactions.iloc[i]['Date'] for i in range(len(transactions))]
+        self.time = [transactions.iloc[i]['Time'] for i in range(len(transactions))]
+        self.transactions = list(zip(self.id, self.name, self.sum, self.date, self.time))
+        self.label = QtWidgets.QLabel(self.scrollArea)
+        self.label.setObjectName("name")
+        self.label.setText('\n\n\n\n'.join(['.' for i in range(len(self.transactions) + 1)]))
+        self.label.setStyleSheet("QPushButton {\n"
+                                 "background-color: rgb(160, 160, 160);\n"
+                                 "border-radius: 17%;\n"
+                                 "color: white;\n"
+                                 "}\n"
+                                 "QPushButton:hover {\n"
+                                 "background-color: rgb(96, 96, 96);\n"
+                                 "}\n"
+                                 "QLabel#name {\n"
+                                 "color: white;\n"
+                                 "}\n")
+        y = 10
+        for transaction in self.transactions:
+            self.label_1 = QtWidgets.QLabel(self.label)
+            self.label_1.setGeometry(QtCore.QRect(20, y + 7, 161, 51))
+            self.label_1.setText(transaction[1])
+            self.label_1.setFont(font)
+            self.label_1.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignTop)
+            # --------
+            self.pushButton_1 = QtWidgets.QPushButton(self.label)
+            self.pushButton_1.setGeometry(QtCore.QRect(170, y, 151, 41))
+            self.pushButton_1.setFont(font)
+            self.pushButton_1.setText("Настроить")
+            # --------
+            self.pushButton_2 = QtWidgets.QPushButton(self.label)
+            self.pushButton_2.setGeometry(QtCore.QRect(330, y, 151, 41))
+            self.pushButton_2.setFont(font)
+            self.pushButton_2.setText("Удалить")
+            self.pushButton_2.clicked.connect(lambda state, transact=transaction: self.delete(transact))
+            y += 50
+        self.scrollArea.setWidget(self.label)
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -52,5 +97,17 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Настройки транзакций"))
         self.pushButton.setText(_translate("MainWindow", "Добавить"))
+
+    def delete(self, transact: tuple):
+        with open('./data/transactions.csv', encoding='utf8') as f:
+            header = ['ID', 'Name', 'Sum', 'Date', 'Time']
+            transaction = [str(value) for value in transact]
+            info = [list(line.values()) for line in csv.DictReader(f)]
+            info.remove(transaction)
+            with open('./data/transactions.csv', 'w', encoding='utf8', newline='\n') as k:
+                csv.writer(k).writerow(header)
+                for i in info:
+                    csv.writer(k).writerow(i)
+        self.to_close = True

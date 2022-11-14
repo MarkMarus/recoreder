@@ -18,7 +18,7 @@ class Ui_MainWindow(object):
         with open('D:/HTMLRecorder/MainProject/data/profiles_main.txt', encoding='utf8') as f:
             info = f.readlines()
             profile_info = ''.join(line for line in info if self.profile_id in line)
-            if not any(True for line in info if self.profile_id in line):
+            if not profile_info:
                 with open('D:/HTMLRecorder/MainProject/data/profiles_main.txt', 'a', encoding='utf8') as k:
                     k.write(f'{self.profile_id} {0} {0} {0}\n')
             if profile_info:

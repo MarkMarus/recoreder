@@ -10,6 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+import pandas as pd
 import multiprocessing
 import MainProject.UI.data_input as di
 import MainProject.UI.transactions_list as tl
@@ -98,8 +99,8 @@ class Ui_MainWindow(object):
         return self.datainput.show()
 
     def transactions(self, profile_id: str):
-        self.transactionslist = TransactionsList(profile_id)
-        return self.transactionslist.show()
+        Ui_MainWindow.transactionslist = TransactionsList(profile_id)
+        return Ui_MainWindow.transactionslist.show()
 
     def start(self, profile_id: str):
         worker = multiprocessing.Process(target=Worker, args=(profile_id, self.dolphin))
@@ -109,7 +110,7 @@ class DataInput(QtWidgets.QMainWindow, di.Ui_MainWindow):
     def __init__(self, profile_id: str):
         self.profile_id = profile_id
         super(DataInput, self).__init__()
-        self.setupUi(self, profile_id)
+        self.setupUi(self, self.profile_id)
         self.timer = QtCore.QTimer(self)
         self.timer.timeout.connect(lambda: self.close() if self.to_close else ...)
         self.timer.start(1000)
@@ -121,4 +122,31 @@ class TransactionsList(QtWidgets.QMainWindow, tl.Ui_MainWindow):
     def __init__(self, profile_id: str):
         self.profile_id = profile_id
         super(TransactionsList, self).__init__()
-        self.setupUi(self)
+        self.setupUi(self, self.profile_id)
+        self.pushButton.clicked.connect(self.add_transaction)
+        self.timer = QtCore.QTimer(self)
+        self.timer.timeout.connect(lambda: self.close_checker() if self.to_close else ...)
+        self.timer.start(1000)
+
+    def add_transaction(self):
+        data = {
+            'ID': [self.profile_id,],
+            'Name': ['Name',],
+            'Sum': ['Sum',],
+            'Date': ['Date',],
+            'Time': ['Time',]
+        }
+        df = pd.DataFrame(data)
+        df.to_csv('./data/transactions.csv', mode='a', index=False, header=False)
+        self.close()
+        self.__init__(self.profile_id)
+        self.show()
+
+    def close_checker(self):
+        self.close()
+        self.__init__(self.profile_id)
+        self.show()
+        self.to_close = False
+
+    def closeEvent(self, a0: QtGui.QCloseEvent):
+        self.timer.stop()
