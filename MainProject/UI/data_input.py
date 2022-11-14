@@ -19,7 +19,7 @@ class Ui_MainWindow(object):
             info = f.readlines()
             profile_info = ''.join(line for line in info if self.profile_id in line)
             if not profile_info:
-                with open('D:/HTMLRecorder/MainProject/data/profiles_main.txt', 'a', encoding='utf8') as k:
+                with open('./data/profiles_main.txt', 'a', encoding='utf8') as k:
                     k.write(f'{self.profile_id} {0} {0} {0}\n')
             if profile_info:
                 balance = profile_info.split(' ')[1]
@@ -111,7 +111,7 @@ class Ui_MainWindow(object):
         self.button.setText(_translate("MainWindow", "Сохранить"))
 
     def save(self):
-        with open('D:/HTMLRecorder/MainProject/data/profiles_main.txt', encoding='utf8') as f:
+        with open('./data/profiles_main.txt', encoding='utf8') as f:
             info = f.readlines()
         info = [line.strip() for line in info]
         for line in info:
@@ -121,6 +121,6 @@ class Ui_MainWindow(object):
                 profile_info = [self.profile_id, self.lineEdit.text(), self.lineEdit_2.text(), self.lineEdit_3.text()]
                 info.append(' '.join(profile_info))
                 break
-        with open('D:/HTMLRecorder/MainProject/data/profiles_main.txt', 'w', encoding='utf8') as f:
+        with open('./data/profiles_main.txt', 'w', encoding='utf8') as f:
             f.writelines(line + '\n' for line in info)
         self.to_close = True
