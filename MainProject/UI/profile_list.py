@@ -160,3 +160,4 @@ class TransactionsList(QtWidgets.QMainWindow, tl.Ui_MainWindow):
 
     def closeEvent(self, a0: QtGui.QCloseEvent):
         self.timer.stop()
+        self.timer_2.stop()
