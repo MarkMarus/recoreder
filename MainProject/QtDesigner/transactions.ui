@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>376</width>
-    <height>266</height>
+    <width>349</width>
+    <height>386</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -139,6 +139,59 @@ QPushButton:hover {
       <width>113</width>
       <height>21</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>252</y>
+      <width>141</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Время:</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_5">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>260</y>
+      <width>113</width>
+      <height>21</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>300</y>
+      <width>311</width>
+      <height>39</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>15</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+      <stylestrategy>PreferDefault</stylestrategy>
+      <kerning>true</kerning>
+     </font>
+    </property>
+    <property name="text">
+     <string>Сохранить</string>
     </property>
    </widget>
   </widget>

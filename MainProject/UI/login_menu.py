@@ -15,7 +15,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setEnabled(True)
-        MainWindow.resize(300, 232)
+        MainWindow.setFixedSize(300, 232)
         MainWindow.setStyleSheet("QMainWindow {\n"
                                  "background: white;\n"
                                  "}\n"

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'transactions.ui'
+# Form implementation generated from reading ui file 'QtDesigner/transactions.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.7
 #
@@ -12,23 +12,25 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
+    def setupUi(self, MainWindow, transaction: tuple):
+        self.transaction = transaction
+        print(self.transaction)
         MainWindow.setObjectName("MainWindow")
         MainWindow.setEnabled(True)
-        MainWindow.resize(376, 266)
+        MainWindow.setFixedSize(349, 386)
         MainWindow.setStyleSheet("QMainWindow {\n"
-"    background: white;\n"
-"}\n"
-"\n"
-"QPushButton {\n"
-"    background-color: rgb(160, 160, 160);\n"
-"    border-radius: 17%;\n"
-"    color: white;\n"
-" }\n"
-"\n"
-"QPushButton:hover {\n"
-"    background-color: rgb(96, 96, 96);\n"
-"}")
+                                 "background: white;\n"
+                                 "}\n"
+                                 "\n"
+                                 "QPushButton {\n"
+                                 "background-color: rgb(160, 160, 160);\n"
+                                 "border-radius: 17%;\n"
+                                 "color: white;\n"
+                                 "}\n"
+                                 "\n"
+                                 "QPushButton:hover {\n"
+                                 "background-color: rgb(96, 96, 96);\n"
+                                 "}")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.label = QtWidgets.QLabel(self.centralwidget)
@@ -42,6 +44,7 @@ class Ui_MainWindow(object):
         self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
         self.lineEdit.setGeometry(QtCore.QRect(210, 80, 111, 21))
         self.lineEdit.setObjectName("lineEdit")
+        self.lineEdit.setText(self.transaction[1])
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setGeometry(QtCore.QRect(20, 75, 171, 31))
         font = QtGui.QFont()
@@ -59,6 +62,7 @@ class Ui_MainWindow(object):
         self.lineEdit_2 = QtWidgets.QLineEdit(self.centralwidget)
         self.lineEdit_2.setGeometry(QtCore.QRect(210, 140, 113, 21))
         self.lineEdit_2.setObjectName("lineEdit_2")
+        self.lineEdit_2.setText(str(self.transaction[2]))
         self.label_5 = QtWidgets.QLabel(self.centralwidget)
         self.label_5.setGeometry(QtCore.QRect(20, 192, 141, 31))
         font = QtGui.QFont()
@@ -69,6 +73,30 @@ class Ui_MainWindow(object):
         self.lineEdit_4 = QtWidgets.QLineEdit(self.centralwidget)
         self.lineEdit_4.setGeometry(QtCore.QRect(210, 200, 113, 21))
         self.lineEdit_4.setObjectName("lineEdit_4")
+        self.lineEdit_4.setText(self.transaction[3])
+        self.label_6 = QtWidgets.QLabel(self.centralwidget)
+        self.label_6.setGeometry(QtCore.QRect(20, 252, 141, 31))
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(14)
+        self.label_6.setFont(font)
+        self.label_6.setObjectName("label_6")
+        self.lineEdit_5 = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit_5.setGeometry(QtCore.QRect(210, 260, 113, 21))
+        self.lineEdit_5.setObjectName("lineEdit_5")
+        self.lineEdit_5.setText(self.transaction[4])
+        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton.setGeometry(QtCore.QRect(20, 300, 311, 39))
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(15)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        font.setKerning(True)
+        font.setStyleStrategy(QtGui.QFont.PreferDefault)
+        self.pushButton.setFont(font)
+        self.pushButton.setObjectName("pushButton")
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -79,8 +107,10 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Настройка транзакции"))
         self.label.setText(_translate("MainWindow", "Транзакции"))
         self.label_2.setText(_translate("MainWindow", "Имя отправителя:"))
         self.label_3.setText(_translate("MainWindow", "Сумма:"))
         self.label_5.setText(_translate("MainWindow", "Дата:"))
+        self.label_6.setText(_translate("MainWindow", "Время:"))
+        self.pushButton.setText(_translate("MainWindow", "Сохранить"))

@@ -5,9 +5,27 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from urllib.request import urlretrieve
+import pandas as pd
 
 class PageSaver:
-    def __init__(self, driver: webdriver):
+    def __init__(self, driver: webdriver, main_balance, fans, percent, pend_balance, profile_id):
+        self.main_balance = main_balance
+        self.fans = int(fans)
+        if self.fans < 1000:
+            self.short_fans = self.fans
+        else:
+            self.short_fans = round(self.fans / 1000, 1)
+            if str(self.short_fans).endswith('.0'):
+                self.short_fans = int(self.short_fans)
+        self.percent = percent
+        self.pend_balance = pend_balance
+        data = pd.read_csv('./data/transactions.csv')
+        transactions = data.loc[data['ID'] == int(profile_id)]
+        name = [transactions.iloc[i]['Name'] for i in range(len(transactions))]
+        sum = [transactions.iloc[i]['Sum'] for i in range(len(transactions))]
+        date = [transactions.iloc[i]['Date'] for i in range(len(transactions))]
+        time = [transactions.iloc[i]['Time'] for i in range(len(transactions))]
+        self.transactions = list(zip(name, sum, date, time))
         self.driver = driver
         self.get_profiles_info()
         self.get_chats()
@@ -16,17 +34,33 @@ class PageSaver:
         self.save_profile()
         self.save_send()
 
+    def save_payments(self, name, sum, date, time):
+        fee = int(int(sum) * 0.2)
+        netto = int(int(sum) - fee)
+        with open('HTML/Payment.html', encoding='utf8') as f:
+            code = f.read()
+        code = code.replace('SET_DATE', date)
+        code = code.replace('SET_TIME', time)
+        code = code.replace('SET_AMOUNT', str(sum))
+        code = code.replace('SET_FEE', str(fee))
+        code = code.replace('SET_NETTO', str(netto))
+        code = code.replace('SET_NAME', name)
+        return code
+
     def save_earnings(self):
         with open('HTML/Statements - OnlyFans.html', encoding='utf8') as f:
             code = f.read()
-        code = code.replace('SET_MAIN_BALANCE', '$1,234.56')
-        code = code.replace('SET_PENDING_BALANCE', '$8,910.11')
-        code = code.replace('SET_PERCENT', '0.8%')
+        code = code.replace('SET_MAIN_BALANCE', self.main_balance)
+        code = code.replace('SET_PENDING_BALANCE', self.pend_balance)
+        code = code.replace('SET_PERCENT', f'{self.percent}%')
         code = code.replace('SET_AVATAR', 'imgs/avatar.png')
         code = code.replace('SET_PAYMENTS', '0')
-        code = code.replace('SET_FANS', '10k')
+        code = code.replace('SET_FANS', f'{self.short_fans}k')
         code = code.replace('SET_PROFILE_NAME', self.profile_name)
         code = code.replace('SET_USER_NAME', self.user_name)
+        for i in self.transactions:
+            payment = self.save_payments(i[0], i[1], i[2], i[3])
+            code = code.replace('<!--SET_PAYMENT-->', payment)
         with open('localhost/Statements.html', 'w+', encoding='utf8') as f:
             f.write(code)
 
@@ -35,7 +69,7 @@ class PageSaver:
             code = f.read()
         code = code.replace('PASTE_CHATS', self.chats)
         code = code.replace('SET_AVATAR', 'imgs/avatar.png')
-        code = code.replace('SET_FANS', '10k')
+        code = code.replace('SET_FANS', f'{self.short_fans}k')
         code = code.replace('SET_PROFILE_NAME', self.profile_name)
         code = code.replace('SET_USER_NAME', self.user_name)
         with open('localhost/Messages.html', 'w+', encoding='utf8') as f:
@@ -49,7 +83,7 @@ class PageSaver:
         code = code.replace('SET_POSTS', self.posts_value)
         code = code.replace('SET_MEDIA_VALUE', self.media_value)
         code = code.replace('SET_LIKES', self.likes_value)
-        code = code.replace('SET_FANS', '10K')
+        code = code.replace('SET_FANS', f'{self.short_fans}K')
         code = code.replace('SET_INFO_TEXT', self.info_text)
         code = code.replace('SET_BANNER', 'imgs/banner.png')
         code = code.replace('SET_AVATAR', 'imgs/avatar.png')
@@ -60,9 +94,9 @@ class PageSaver:
     def save_send(self):
         with open('HTML/Select users to send them a message - OnlyFans.html', encoding='utf8') as f:
             code = f.read()
-        code = code.replace('SET_FANS_FULL', '1337')
+        code = code.replace('SET_FANS_FULL', str(self.fans))
         code = code.replace('SET_AVATAR', 'imgs/avatar.png')
-        code = code.replace('SET_FANS', '10k')
+        code = code.replace('SET_FANS', f'{self.short_fans}k')
         code = code.replace('SET_PROFILE_NAME', self.profile_name)
         code = code.replace('SET_USER_NAME', self.user_name)
         with open('localhost/Send.html', 'w+', encoding='utf8') as f:
@@ -77,7 +111,7 @@ class PageSaver:
 
     def get_profiles_info(self):
         self.driver.get("https://onlyfans.com")
-        element = WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.CLASS_NAME, 'user_posts'))
         )
         self.driver.execute_script("""

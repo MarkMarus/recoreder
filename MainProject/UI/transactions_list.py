@@ -12,6 +12,10 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import pandas as pd
 import csv
 
+import UI.transactions as t
+
+toClose = False
+
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow, profile_id: str):
         self.to_close = False
@@ -79,6 +83,7 @@ class Ui_MainWindow(object):
             self.pushButton_1.setGeometry(QtCore.QRect(170, y, 151, 41))
             self.pushButton_1.setFont(font)
             self.pushButton_1.setText("Настроить")
+            self.pushButton_1.clicked.connect(lambda state, trns=transaction: self.transact_win(trns))
             # --------
             self.pushButton_2 = QtWidgets.QPushButton(self.label)
             self.pushButton_2.setGeometry(QtCore.QRect(330, y, 151, 41))
@@ -111,3 +116,32 @@ class Ui_MainWindow(object):
                 for i in info:
                     csv.writer(k).writerow(i)
         self.to_close = True
+
+    def transact_win(self, transaction: tuple):
+        self.transact = Transactions(transaction, self.profile_id)
+        return self.transact.show()
+
+class Transactions(QtWidgets.QMainWindow, t.Ui_MainWindow):
+    def __init__(self, transaction: tuple, profile_id: str):
+        self.transaction = transaction
+        super(Transactions, self).__init__()
+        self.setupUi(self, transaction)
+        self.pushButton.clicked.connect(lambda: self.save(profile_id, self.lineEdit.text(), self.lineEdit_2.text(), self.lineEdit_4.text(), self.lineEdit_5.text()))
+
+    def save(self, id: str, name: str, sum: str, date: str, time: str):
+        global toClose
+        with open('./data/transactions.csv', encoding='utf8') as f:
+            header = ['ID', 'Name', 'Sum', 'Date', 'Time']
+            transact = [id, name, sum, date, time]
+            transaction = list(str(i) for i in self.transaction)
+            info = [list(line.values()) for line in csv.DictReader(f)]
+            print(info)
+            print(transaction)
+            info.remove(transaction)
+            with open('./data/transactions.csv', 'w', encoding='utf8', newline='\n') as k:
+                csv.writer(k).writerow(header)
+                for i in info:
+                    csv.writer(k).writerow(i)
+                csv.writer(k).writerow(transact)
+        self.close()
+        toClose = True

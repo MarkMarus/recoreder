@@ -20,18 +20,20 @@ class Ui_MainWindow(object):
             profile_info = ''.join(line for line in info if self.profile_id in line)
             if not profile_info:
                 with open('./data/profiles_main.txt', 'a', encoding='utf8') as k:
-                    k.write(f'{self.profile_id} {0} {0} {0}\n')
+                    k.write(f'{self.profile_id} {0} {0} {0} {0}\n')
             if profile_info:
                 balance = profile_info.split(' ')[1]
                 fans = profile_info.split(' ')[2]
                 percent = profile_info.split(' ')[3]
+                pend = profile_info.split(' ')[4]
             else:
                 balance = '0'
                 fans = '0'
                 percent = '0'
+                pend = '0'
         MainWindow.setObjectName("MainWindow")
         MainWindow.setEnabled(True)
-        MainWindow.setFixedSize(354, 294)
+        MainWindow.setFixedSize(354, 400)
         MainWindow.setStyleSheet("QMainWindow {\n"
                                  "background: white;\n"
                                  "}\n"
@@ -68,29 +70,35 @@ class Ui_MainWindow(object):
         self.lineEdit.setObjectName("lineEdit")
         self.lineEdit.setText(balance)
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
-        self.label_3.setGeometry(QtCore.QRect(30, 132, 58, 16))
+        self.label_3.setGeometry(QtCore.QRect(30, 182, 58, 16))
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(14)
         self.label_3.setFont(font)
         self.label_3.setObjectName("label_3")
         self.lineEdit_2 = QtWidgets.QLineEdit(self.centralwidget)
-        self.lineEdit_2.setGeometry(QtCore.QRect(190, 130, 113, 21))
+        self.lineEdit_2.setGeometry(QtCore.QRect(190, 180, 113, 21))
         self.lineEdit_2.setObjectName("lineEdit_2")
         self.lineEdit_2.setText(fans)
         self.label_4 = QtWidgets.QLabel(self.centralwidget)
-        self.label_4.setGeometry(QtCore.QRect(30, 182, 131, 16))
+        self.label_4.setGeometry(QtCore.QRect(30, 232, 131, 16))
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(14)
         self.label_4.setFont(font)
         self.label_4.setObjectName("label_4")
         self.lineEdit_3 = QtWidgets.QLineEdit(self.centralwidget)
-        self.lineEdit_3.setGeometry(QtCore.QRect(190, 180, 113, 21))
+        self.lineEdit_3.setGeometry(QtCore.QRect(190, 230, 113, 21))
         self.lineEdit_3.setObjectName("lineEdit_3")
         self.lineEdit_3.setText(percent)
+        self.label_5 = QtWidgets.QLabel(self.centralwidget)
+        self.label_5.setFont(font)
+        self.label_5.setGeometry(QtCore.QRect(30, 132, 131, 16))
+        self.lineEdit_4 = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit_4.setGeometry(QtCore.QRect(190, 130, 113, 21))
+        self.lineEdit_4.setText(pend)
         self.button = QtWidgets.QPushButton(self.centralwidget)
-        self.button.setGeometry(QtCore.QRect(40, 220, 261, 41))
+        self.button.setGeometry(QtCore.QRect(40, 282, 261, 41))
         self.button.setFont(font)
         self.button.clicked.connect(self.save)
         MainWindow.setCentralWidget(self.centralwidget)
@@ -106,6 +114,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "Основые настройки"))
         self.label.setText(_translate("MainWindow", "Профиль"))
         self.label_2.setText(_translate("MainWindow", "Баланс:"))
+        self.label_5.setText(_translate("MainWindow", "Втор. баланс:"))
         self.label_3.setText(_translate("MainWindow", "Фанс:"))
         self.label_4.setText(_translate("MainWindow", "Топ (процент):"))
         self.button.setText(_translate("MainWindow", "Сохранить"))
@@ -118,7 +127,7 @@ class Ui_MainWindow(object):
             profile_info = line.split(' ')
             if profile_info[0] == self.profile_id:
                 info.remove(line)
-                profile_info = [self.profile_id, self.lineEdit.text(), self.lineEdit_2.text(), self.lineEdit_3.text()]
+                profile_info = [self.profile_id, self.lineEdit.text(), self.lineEdit_2.text(), self.lineEdit_3.text(), self.lineEdit_4.text()]
                 info.append(' '.join(profile_info))
                 break
         with open('./data/profiles_main.txt', 'w', encoding='utf8') as f:

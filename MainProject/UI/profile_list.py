@@ -12,9 +12,10 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 import pandas as pd
 import multiprocessing
-import MainProject.UI.data_input as di
-import MainProject.UI.transactions_list as tl
-from MainProject.Worker import Worker
+import UI.data_input as di
+import UI.transactions_list as tl
+
+from Worker import Worker
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow, dolphin):
@@ -127,6 +128,9 @@ class TransactionsList(QtWidgets.QMainWindow, tl.Ui_MainWindow):
         self.timer = QtCore.QTimer(self)
         self.timer.timeout.connect(lambda: self.close_checker() if self.to_close else ...)
         self.timer.start(1000)
+        self.timer_2 = QtCore.QTimer(self)
+        self.timer_2.timeout.connect(lambda: self.close_checker_2() if tl.toClose else ...)
+        self.timer_2.start(1000)
 
     def add_transaction(self):
         data = {
@@ -147,6 +151,12 @@ class TransactionsList(QtWidgets.QMainWindow, tl.Ui_MainWindow):
         self.__init__(self.profile_id)
         self.show()
         self.to_close = False
+
+    def close_checker_2(self):
+        self.close()
+        self.__init__(self.profile_id)
+        self.show()
+        tl.toClose = False
 
     def closeEvent(self, a0: QtGui.QCloseEvent):
         self.timer.stop()
