@@ -132,5 +132,4 @@ class Recorder:
         for file in files:
             print(file)
             shutil.move(file, f"video/{count}.mp4")
-            os.remove(file)
             count += 1
