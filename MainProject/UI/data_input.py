@@ -15,7 +15,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow, profile_id: str):
         self.to_close = False
         self.profile_id = profile_id
-        with open('D:/HTMLRecorder/MainProject/data/profiles_main.txt', encoding='utf8') as f:
+        with open('./data/profiles_main.txt', encoding='utf8') as f:
             info = f.readlines()
             profile_info = ''.join(line for line in info if self.profile_id in line)
             if not profile_info:

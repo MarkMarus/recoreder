@@ -4,6 +4,8 @@ from selenium.webdriver.chrome.service import Service
 from threading import Thread
 from PageSaver import PageSaver
 from Recorder import Recorder
+import subprocess
+
 
 class Worker:
     def __init__(self, profile_id: str, dolphin):
@@ -14,14 +16,14 @@ class Worker:
             percent = info[3]
             pend_balance = info[4]
         self.dolphin = dolphin
-        port = self.dolphin.start_profile(profile_id, headless=True)
+        port = self.dolphin.start_profile(profile_id, headless=False)
         options = webdriver.ChromeOptions()
-        options.headless = True
+        options.headless = False
         options.add_argument("--start-maximized")
         options.add_experimental_option("debuggerAddress", f"127.0.0.1:{port}")
         self.driver = webdriver.Chrome(service=Service('chromedriver.exe'), options=options)
         print('Браузер запущен')
         PageSaver(self.driver, main_balance, fans, percent, pend_balance, profile_id)
         self.dolphin.stop_profile(profile_id)
-        Thread(target=lambda: os.system('python -m http.server 1337')).start()
+        Thread(target=lambda: subprocess.call('python3 -m http.server 1233', shell=True)).start()
         Recorder()
