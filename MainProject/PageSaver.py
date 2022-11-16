@@ -2,8 +2,6 @@ import re
 import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from urllib.request import urlretrieve
 import pandas as pd
 
@@ -13,10 +11,12 @@ class PageSaver:
         self.fans = int(fans)
         if self.fans < 1000:
             self.short_fans = self.fans
+            self.short_fans = str(self.short_fans)
         else:
             self.short_fans = round(self.fans / 1000, 1)
             if str(self.short_fans).endswith('.0'):
                 self.short_fans = int(self.short_fans)
+            self.short_fans = f'{self.short_fans}K'
         self.percent = percent
         self.pend_balance = pend_balance
         data = pd.read_csv('./data/transactions.csv')
@@ -54,8 +54,7 @@ class PageSaver:
         code = code.replace('SET_PENDING_BALANCE', self.pend_balance)
         code = code.replace('SET_PERCENT', f'{self.percent}%')
         code = code.replace('SET_AVATAR', 'imgs/avatar.png')
-        code = code.replace('SET_PAYMENTS', '0')
-        code = code.replace('SET_FANS', f'{self.short_fans}k')
+        code = code.replace('SET_FANS', self.short_fans)
         code = code.replace('SET_PROFILE_NAME', self.profile_name)
         code = code.replace('SET_USER_NAME', self.user_name)
         for i in self.transactions:
@@ -69,7 +68,7 @@ class PageSaver:
             code = f.read()
         code = code.replace('PASTE_CHATS', self.chats)
         code = code.replace('SET_AVATAR', 'imgs/avatar.png')
-        code = code.replace('SET_FANS', f'{self.short_fans}k')
+        code = code.replace('SET_FANS', self.short_fans)
         code = code.replace('SET_PROFILE_NAME', self.profile_name)
         code = code.replace('SET_USER_NAME', self.user_name)
         with open('localhost/Messages.html', 'w+', encoding='utf8') as f:
@@ -83,7 +82,7 @@ class PageSaver:
         code = code.replace('SET_POSTS', self.posts_value)
         code = code.replace('SET_MEDIA_VALUE', self.media_value)
         code = code.replace('SET_LIKES', self.likes_value)
-        code = code.replace('SET_FANS', f'{self.short_fans}K')
+        code = code.replace('SET_FANS', self.short_fans)
         code = code.replace('SET_INFO_TEXT', self.info_text)
         code = code.replace('SET_BANNER', 'imgs/banner.png')
         code = code.replace('SET_AVATAR', 'imgs/avatar.png')
@@ -94,9 +93,9 @@ class PageSaver:
     def save_send(self):
         with open('HTML/Select users to send them a message - OnlyFans.html', encoding='utf8') as f:
             code = f.read()
-        code = code.replace('SET_FANS_FULL', str(self.fans))
+        code = code.replace('SET_FANFULL', str(self.fans))
         code = code.replace('SET_AVATAR', 'imgs/avatar.png')
-        code = code.replace('SET_FANS', f'{self.short_fans}k')
+        code = code.replace('SET_FANS', self.short_fans)
         code = code.replace('SET_PROFILE_NAME', self.profile_name)
         code = code.replace('SET_USER_NAME', self.user_name)
         with open('localhost/Send.html', 'w+', encoding='utf8') as f:
@@ -111,12 +110,14 @@ class PageSaver:
 
     def get_profiles_info(self):
         self.driver.get("https://onlyfans.com")
-        WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.CLASS_NAME, 'user_posts'))
-        )
-        self.driver.execute_script("""
-            document.querySelectorAll("[data-name='Profile']")[0].click();
-        """)
+        while True:
+            try:
+                self.driver.execute_script("""
+                    document.querySelectorAll("[data-name='Profile']")[0].click();
+                """)
+                break
+            except:
+                time.sleep(2)
         time.sleep(10)
         self.profile_name = self.driver.execute_script("""
             return document.querySelectorAll("[class='b-username']")[0].textContent;

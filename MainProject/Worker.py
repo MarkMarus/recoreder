@@ -23,5 +23,5 @@ class Worker:
         print('Браузер запущен')
         PageSaver(self.driver, main_balance, fans, percent, pend_balance, profile_id)
         self.dolphin.stop_profile(profile_id)
-        Thread(target=lambda: os.system('python -m http.server 1337')).start()r
+        Thread(target=lambda: os.system('python -m http.server 1337')).start()
         Recorder()
