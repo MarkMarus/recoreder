@@ -19,6 +19,7 @@ class Recorder:
         self.record3()
         time.sleep(30)
         subprocess.call('pkill -x Simulator', shell=True)
+        self.saver()
 
     def record1(self):
         time.sleep(5)
@@ -126,8 +127,9 @@ class Recorder:
     def saver(self):
         with open('username.txt', encoding='utf8') as f:
             username = f.read().strip()
+        files = [file for file in glob.glob(f'/Users/{username}/Desktop/Simulator*.mp4')]
         count = 1
-        for file in glob.glob(f'/Users/{username}/Desktop/Simulator*.mp4'):
+        for file in files:
             print(file)
             shutil.move(file, f"video/{count}.mp4")
             os.remove(file)

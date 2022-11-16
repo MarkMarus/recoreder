@@ -13,10 +13,12 @@ class PageSaver:
         self.fans = int(fans)
         if self.fans < 1000:
             self.short_fans = self.fans
+            self.short_fans = str(self.short_fans)
         else:
             self.short_fans = round(self.fans / 1000, 1)
             if str(self.short_fans).endswith('.0'):
                 self.short_fans = int(self.short_fans)
+            self.short_fans = f'{self.short_fans}K'
         self.percent = percent
         self.pend_balance = pend_balance
         data = pd.read_csv('./data/transactions.csv')
@@ -55,7 +57,7 @@ class PageSaver:
         code = code.replace('SET_PERCENT', f'{self.percent}%')
         code = code.replace('SET_AVATAR', 'imgs/avatar.png')
         code = code.replace('SET_PAYMENTS', '0')
-        code = code.replace('SET_FANS', f'{self.short_fans}k')
+        code = code.replace('SET_FANS', self.short_fans)
         code = code.replace('SET_PROFILE_NAME', self.profile_name)
         code = code.replace('SET_USER_NAME', self.user_name)
         for i in self.transactions:
@@ -69,7 +71,7 @@ class PageSaver:
             code = f.read()
         code = code.replace('PASTE_CHATS', self.chats)
         code = code.replace('SET_AVATAR', 'imgs/avatar.png')
-        code = code.replace('SET_FANS', f'{self.short_fans}k')
+        code = code.replace('SET_FANS', self.short_fans)
         code = code.replace('SET_PROFILE_NAME', self.profile_name)
         code = code.replace('SET_USER_NAME', self.user_name)
         with open('localhost/Messages.html', 'w+', encoding='utf8') as f:
@@ -83,7 +85,7 @@ class PageSaver:
         code = code.replace('SET_POSTS', self.posts_value)
         code = code.replace('SET_MEDIA_VALUE', self.media_value)
         code = code.replace('SET_LIKES', self.likes_value)
-        code = code.replace('SET_FANS', f'{self.short_fans}K')
+        code = code.replace('SET_FANS', self.short_fans)
         code = code.replace('SET_INFO_TEXT', self.info_text)
         code = code.replace('SET_BANNER', 'imgs/banner.png')
         code = code.replace('SET_AVATAR', 'imgs/avatar.png')
@@ -94,9 +96,9 @@ class PageSaver:
     def save_send(self):
         with open('HTML/Select users to send them a message - OnlyFans.html', encoding='utf8') as f:
             code = f.read()
-        code = code.replace('SET_FANS_FULL', str(self.fans))
+        code = code.replace('SET_FANFULL', str(self.fans))
         code = code.replace('SET_AVATAR', 'imgs/avatar.png')
-        code = code.replace('SET_FANS', f'{self.short_fans}k')
+        code = code.replace('SET_FANS', self.short_fans)
         code = code.replace('SET_PROFILE_NAME', self.profile_name)
         code = code.replace('SET_USER_NAME', self.user_name)
         with open('localhost/Send.html', 'w+', encoding='utf8') as f:
