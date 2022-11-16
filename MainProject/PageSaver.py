@@ -111,12 +111,14 @@ class PageSaver:
 
     def get_profiles_info(self):
         self.driver.get("https://onlyfans.com")
-        WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.CLASS_NAME, 'user_posts'))
-        )
-        self.driver.execute_script("""
-            document.querySelectorAll("[data-name='Profile']")[0].click();
-        """)
+        while True:    
+            try:
+                self.driver.execute_script("""
+                    document.querySelectorAll("[data-name='Profile']")[0].click();
+                """)
+                break
+            except:
+                time.sleep(2)
         time.sleep(10)
         self.profile_name = self.driver.execute_script("""
             return document.querySelectorAll("[class='b-username']")[0].textContent;
