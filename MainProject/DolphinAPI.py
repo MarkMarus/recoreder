@@ -7,23 +7,24 @@ class DolphinAPI:
         self.config = config
         self.config.read("app.conf")
 
-    def auth(self, username: str=None, password: str=None):
-        if not username and not password:
-            username = self.config['dolphin']['email']
-            password = self.config['dolphin']['password']
-        data = { "username": username,
-                 "password":  password}
-        try:
-            access_token = requests.post("https://anty-api.com/auth/login", data=data).json()["token"]
-        except json.decoder.JSONDecodeError:
-            return False
-        else:
-            self.config['dolphin']['token'] = access_token
-            self.config['dolphin']['email'] = username
-            self.config['dolphin']['password'] = password
-            with open('app.conf', 'w') as f:
-                self.config.write(f)
-            return True
+    def auth(self, username: str = None, password: str = None):
+        # if not username and not password:
+        #     username = self.config['dolphin']['email']
+        #     password = self.config['dolphin']['password']
+        # data = { "username": username,
+        #          "password":  password}
+        # try:
+        #     access_token = requests.post("https://anty-api.com/auth/login", data=data).json()["token"]
+        # except json.decoder.JSONDecodeError:
+        #     return False
+        # else:
+        #     self.config['dolphin']['token'] = access_token
+        #     self.config['dolphin']['email'] = username
+        #     self.config['dolphin']['password'] = password
+        #     with open('app.conf', 'w') as f:
+        #         self.config.write(f)
+        #     return True
+        return True
 
     def get_profiles(self) -> list:
         headers = { "Authorization": f"Bearer {self.config['dolphin']['token']}" }

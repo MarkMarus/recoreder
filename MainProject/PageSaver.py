@@ -2,8 +2,6 @@ import re
 import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from urllib.request import urlretrieve
 import pandas as pd
 
@@ -38,7 +36,6 @@ class PageSaver:
         self.save_chats()
         self.save_profile()
         self.save_send()
-        self.saveloading2()
 
     def save_payments(self, name, sum, date, time):
         fee = int(int(sum) * 0.2)
@@ -113,29 +110,21 @@ class PageSaver:
             code = f.read()
         code = code.replace('SET_MAIN_BALANCE', self.main_balance)
         code = code.replace('SET_PENDING_BALANCE', self.pend_balance)
-        code = code.replace('SET_PERCENT', f'{self.percent}')
-        code = code.replace('SET_AVATAR', '../../../imgs/avatar.png')
+        code = code.replace('SET_PERCENT', f'{self.percent}%')
         with open('localhost/js/loading/statements/2.html', 'w+', encoding='utf8') as f:
-            f.write(code)
-
-    def saveloading2(self):
-        with open('HTML/1.html', encoding='utf8') as f:
-            code = f.read()
-        code = code.replace('SET_AVATAR', '../../../imgs/avatar.png')
-        with open('localhost/js/loading/statements/1.html', 'w+', encoding='utf8') as f:
             f.write(code)
 
     def loadingmsg(self):
         with open('HTML/LoadingToMessages.html', encoding='utf8') as f:
             code = f.read()
-        code = code.replace('SET_AVATAR', '../../imgs/avatar.png')
+        code = code.replace('SET_AVATAR', 'imgs/avatar.png')
         with open('localhost/js/loading/LoadingToMessages.html', 'w+', encoding='utf8') as f:
             f.write(code)
 
     def loadingsstate(self):
         with open('HTML/LoadingToStatements.html', encoding='utf8') as f:
             code = f.read()
-        code = code.replace('SET_AVATAR', '../../imgs/avatar.png')
+        code = code.replace('SET_AVATAR', 'imgs/avatar.png')
         with open('localhost/js/loading/LoadingToStatements.html', 'w+', encoding='utf8') as f:
             f.write(code)
 

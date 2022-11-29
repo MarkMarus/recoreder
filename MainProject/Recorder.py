@@ -1,6 +1,5 @@
 import pyautogui
 import time
-import os
 import subprocess
 import glob
 import shutil
@@ -9,6 +8,7 @@ class Recorder:
     def __init__(self):
         subprocess.call('open -a simulator', shell=True)
         time.sleep(20)
+        subprocess.call('xcrun simctl status_bar booted override --cellularMode active --cellularBars 4', shell=True)
         self.x, self.y = pyautogui.size()
         self.x = self.x / 2
         self.y = self.y / 2 + 50
