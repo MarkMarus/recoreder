@@ -5,6 +5,7 @@ from PageSaver import PageSaver
 from WebRecorder import WebRecorder
 from Edit import Edit
 import subprocess
+import time
 
 
 class Worker:
@@ -25,5 +26,6 @@ class Worker:
         print('Браузер запущен')
         PageSaver(self.driver, main_balance, fans, percent, pend_balance, profile_id)
         # self.dolphin.stop_profile(profile_id)
-        Thread(target=lambda: subprocess.call('python -m http.server 1233', shell=True)).start()
+        Thread(target=lambda: subprocess.call('python3 -m http.server 1233', shell=True)).start()
+        time.sleep(5)
         WebRecorder(self.driver)

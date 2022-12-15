@@ -8,7 +8,108 @@
       .vjs-fluid {
         padding-top: 56.25%
       }
+      header.l-header{
+        overflow: hidden;
+      }
+      .m-sidebar-visible .l-sidebar__overlay[data-v-76137ada]{
+        max-height: 455px;
+        margin-top: 30px;
+      }
+      .m-sidebar-visible .l-sidebar[data-v-76137ada]:after {
+        max-height: 455px;
+        margin-top: 30px;
+    }
+    .m-sidebar-visible .l-sidebar__inner[data-v-76137ada]{
+        max-height: 455px;
+        margin-top: 30px;
+    }
+    .l-sidebar__wrapper-close{
+        margin-top: 30px;
+      }
+      .footer_wrapper{
+  margin: 0px;
+}
+.icons{
+  height: 40px;
+  width: 70px;
+  text-align: center;
+}
+.footer ul{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  margin: 10px 0 10px 0;
+}
+.footer_nav_container img{
+  width: 140px;
+  height: 135px;
+}
+.footer ul li button{
+  border-radius: 100%;
+}
+.block_ssl{
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  font-family: sans-serif;
+  margin: 0 0 10px 0px;;
+}
+.footer_block_link{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer_block_link p{
+  font-size: 16px;
+  padding-top: 5px;
+}
+.icons img{
+  margin-bottom: 1px;
+  height: 20px;
+  width: 25px;
+}
+.footer_buttons{
+  padding-bottom: 15px;
+  margin: 0 auto;
+}
+.footer_buttons ul{
+  list-style: none;
+  padding: 0px;
+  display: flex;
+  justify-content: space-around;
+}
+#img{
+  height: 24px;
+  width: 30px;
+  padding-top: 3px;
+}
+.footer_line{
+  width: 115px;
+  height: 3px;
+  background-color: black;
+  border-radius: 10px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+} .hides{
+  transition: all .3s ease;
+}
+.hides.out{
+  transform: translateY(1000%);
+  height: 10px;
+  transition: all .6s ease;
+}
+.active{
+  margin: 0px 0 -20px 0;
+  transition: all .6s ease;
+}
+.footer_block_link.active p{
+  font-size: 12px;
+  transition: all .3s ease;
+}
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <title>Select users to send them a message — OnlyFans</title>
   <meta name="description" content="OnlyFans">
   <meta name="keywords" content="OnlyFans">
@@ -99,7 +200,152 @@ Default styles for videojs-record 4.3.0
     <strong>OnlyFans</strong>
   </noscript>
   
-  <div class="main-wrapper"><!----><div class="container m-main-container"><header data-v-27a4a595="" class="l-header container"><nav data-v-27a4a595="" at-attr="header_menu" class="l-header__menu"><a data-v-27a4a595="" data-savepage-href="/" href="https://onlyfans.com/" class="l-header__menu__item m-size-lg-hover m-with-round-hover m-width-fluid-hover"><span data-v-27a4a595="" class="l-header__menu__item__icon"><svg data-v-27a4a595="" extra-class="m-nav-icon" class="g-icon m-nav-icon" aria-hidden="true"><use data-savepage-href="/theme/onlyfans/spa/icons/sprite.svg?rev=202211120024-231d794c13#icon-home" href="#icon-home" href="/theme/onlyfans/spa/icons/sprite.svg?rev=202211120024-231d794c13#icon-home"></use><!--savepage-symbol-insert--><symbol id="icon-home" viewBox="0 0 32 32">
+  <div class="main-wrapper">
+
+    <div class="uppers">
+      <div class="upper">
+
+        <div class="time_block">
+          <div class="timer_block">
+            <div class="block_body">
+              <div class="body_times">
+
+                <p id="clock"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="upper_list">
+          <ul>
+            <li><img src="img/image11.svg"></li>
+            <li><img src="img/image22.svg"></li>
+            <li><img src='img/image33.svg'></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      body {
+        margin: 0px;
+      }
+
+      .uppers {
+        position: sticky;
+        top: 0px;
+        z-index: 1000;
+      }
+
+      .upper {
+        display: flex;
+        background-color: #4e4c4f;
+        justify-content: space-between;
+        align-items: flex-start;
+        /*new*/
+        padding: 11px 14px 11px 25px;
+      }
+      .time_block {
+        width: 54px;
+        height: 21px;
+        background-color: #FF3B30;
+        border-radius: 15px;
+        transition: 2.5s;
+      }
+
+      .activity {
+        background-color: #FF3B30;
+        transition: 2.5s;
+      }
+
+      .timer_block {
+        display:flex;
+        justify-content:center;
+        align-items:center;
+      }
+
+      .block_body {
+        text-align: center;
+        line-height: 6px;
+      }
+
+      .body_times {
+        text-align: center;
+        line-height: 6px;
+      }
+
+      #tyt {
+        width: 15px;
+        height: 15px;
+        transition: 1s;
+      }
+
+      .upper_list ul {
+        display: flex;
+        list-style: none;
+        margin: 0px;
+      }
+
+      .upper_list ul li {
+        padding: 0 4px 0 0;
+      }
+
+      .upper_list ul li img {
+        width: 20px;
+        height: 15px;
+      }
+
+      #clock {
+        margin: 0px;
+        padding: 0px;
+        color: #fff;
+        font-size: 13px;
+        font-family: SF Pro Display;
+      }
+    </style>
+    
+    <script>
+      let activ = document;
+      let activity = document.querySelector('.time_block');
+      let img = document.getElementById('tyt');
+
+
+      setInterval(() => {
+        if (activity.classList.contains('activity')) {
+          activity.classList.remove('activity');
+        } else {
+          activity.classList.add('activity');
+        }
+      }, 2400);
+
+      setInterval(() => {
+
+        // setTimeout(() => {
+        //   img.style.opacity = '0';
+        //   img.style.width = '0px';
+        // }, 2000);
+        // setTimeout(() => {
+        //   img.style.height = '0px';
+        // }, 2100);
+        setTimeout(() => {
+
+          function clock() {
+            var date = new Date(),
+              hours = (date.getHours() < 10) ? '0' + date.getHours() : date.getHours(),
+              minutes = (date.getMinutes() < 10) ? '0' + date.getMinutes() : date.getMinutes();
+            document.getElementById('clock').innerHTML = hours + ':' + minutes;
+          }
+          clock();
+        }, 200);
+        clock();
+
+
+      }, 10);     
+    </script>
+    
+    
+    
+    <!----><div class="container m-main-container"><header data-v-27a4a595="" class="l-header container"><nav data-v-27a4a595="" at-attr="header_menu" class="l-header__menu"><a data-v-27a4a595="" data-savepage-href="/" href="https://onlyfans.com/" class="l-header__menu__item m-size-lg-hover m-with-round-hover m-width-fluid-hover"><span data-v-27a4a595="" class="l-header__menu__item__icon"><svg data-v-27a4a595="" extra-class="m-nav-icon" class="g-icon m-nav-icon" aria-hidden="true"><use data-savepage-href="/theme/onlyfans/spa/icons/sprite.svg?rev=202211120024-231d794c13#icon-home" href="#icon-home" href="/theme/onlyfans/spa/icons/sprite.svg?rev=202211120024-231d794c13#icon-home"></use><!--savepage-symbol-insert--><symbol id="icon-home" viewBox="0 0 32 32">
         <path d="M29,13.82a1,1,0,0,0-.37-.77l-12-9.82a1,1,0,0,0-1.26,0l-12,9.82a1,1,0,0,0-.37.77,1,1,0,0,0,1,1,.94.94,0,0,0,.63-.23L6,13.47V24.2A2.81,2.81,0,0,0,8.8,27h2.9a2.81,2.81,0,0,0,2.8-2.8V22.8a.8.8,0,0,1,.8-.8h1.4a.8.8,0,0,1,.8.8v1.4A2.81,2.81,0,0,0,20.3,27h2.9A2.81,2.81,0,0,0,26,24.2V13.47l1.37,1.12a.94.94,0,0,0,.63.23A1,1,0,0,0,29,13.82ZM24,24.2a.8.8,0,0,1-.8.8H20.3a.8.8,0,0,1-.8-.8V22.8A2.81,2.81,0,0,0,16.7,20H15.3a2.81,2.81,0,0,0-2.8,2.8v1.4a.8.8,0,0,1-.8.8H8.8a.8.8,0,0,1-.8-.8V11.84l8-6.55,8,6.55Z"></path>
     </symbol></svg><span data-v-27a4a595="" class="l-header__menu__item__count"> 2 </span></span><span data-v-27a4a595="" class="l-header__menu__item__text"> Home </span></a><a data-v-27a4a595="" data-savepage-href="/my/notifications" href="https://onlyfans.com/my/notifications" active-class="m-current" exact-active-class="" data-name="Notifications" class="l-header__menu__item m-size-lg-hover m-with-round-hover m-width-fluid-hover"><span data-v-27a4a595="" class="l-header__menu__item__icon"><svg data-v-27a4a595="" extra-class="m-nav-icon" class="g-icon m-nav-icon" aria-hidden="true"><use data-savepage-href="/theme/onlyfans/spa/icons/sprite.svg?rev=202211120024-231d794c13#icon-notifications" href="#icon-notifications" href="/theme/onlyfans/spa/icons/sprite.svg?rev=202211120024-231d794c13#icon-notifications"></use><!--savepage-symbol-insert--><symbol id="icon-notifications" viewBox="0 0 32 32">
         <path d="M27.55,22A1.56,1.56,0,0,1,26,20.43V14A10,10,0,0,0,6,14v6.44A1.56,1.56,0,0,1,4.45,22a1,1,0,1,0,0,2H11.1a5,5,0,0,0,9.8,0h6.65a1,1,0,0,0,0-2ZM16,26a3,3,0,0,1-2.82-2h5.64A3,3,0,0,1,16,26ZM7.65,22A3.58,3.58,0,0,0,8,20.43V14a8,8,0,0,1,16,0v6.44A3.58,3.58,0,0,0,24.35,22Z"></path>
@@ -119,7 +365,7 @@ Default styles for videojs-record 4.3.0
         <path d="M17 13h-4v4a1 1 0 01-2 0v-4H7a1 1 0 010-2h4V7a1 1 0 012 0v4h4a1 1 0 010 2z"></path>
     </symbol></svg></span></span><span data-v-56d8d98a="" class="connected-accounts-profile-link"><span data-v-56d8d98a="" class="g-user-name"> Add another account </span></span></a></a></li></ul></div><div class="b-username-row m-width-limit m-gap-lg-middle"><a at-attr="my_profile" data-name="Profile_topLink" data-savepage-href="/syren_paradise" href="https://onlyfans.com/syren_paradise" class="b-username"><div class="g-user-name m-verified">  Enchantress 🧝🏻‍♀️  <svg extra-class="m-verified" class="g-icon m-verified" aria-hidden="true"><use data-savepage-href="/theme/onlyfans/spa/icons/sprite.svg?rev=202211120024-231d794c13#icon-verified" href="#icon-verified" href="/theme/onlyfans/spa/icons/sprite.svg?rev=202211120024-231d794c13#icon-verified"></use><!--savepage-symbol-insert--><symbol id="icon-verified" viewBox="0 0 24 24">
         <path d="M23,12a1,1,0,0,0-.28-.7l-1.15-1.19a1,1,0,0,0-.72-.3,1,1,0,0,0-1,1,1,1,0,0,0,.28.69l.48.5-.69.72a4,4,0,0,0-1.14,2.78,3.43,3.43,0,0,0,0,.56l.14,1-1,.17a4,4,0,0,0-2.85,2.07l-.47.88-.91-.44a3.94,3.94,0,0,0-1.75-.4,4.15,4.15,0,0,0-1.76.4l-.9.44-.47-.88A4,4,0,0,0,6,17.23l-1-.17.14-1a3.39,3.39,0,0,0,0-.55,4,4,0,0,0-1.13-2.78L3.39,12l.69-.72A4,4,0,0,0,5.22,8.5a3.43,3.43,0,0,0,0-.56L5,6.94l1-.17A4,4,0,0,0,8.87,4.7l.47-.88.91.44a3.94,3.94,0,0,0,1.75.4,4.15,4.15,0,0,0,1.76-.4l.9-.44.46.86a1,1,0,0,0,1.93-.39,1,1,0,0,0-.18-.57L16,2a1,1,0,0,0-.88-.53,1,1,0,0,0-.44.1l-1.76.87a2.14,2.14,0,0,1-.89.2,2.06,2.06,0,0,1-.88-.2L9.35,1.59A1,1,0,0,0,8,2L7.11,3.76a2,2,0,0,1-1.43,1l-1.94.34a1,1,0,0,0-.83,1,.66.66,0,0,0,0,.14l.28,2a2.64,2.64,0,0,1,0,.28,2,2,0,0,1-.57,1.39L1.28,11.31a1,1,0,0,0,0,1.38l1.38,1.43a2,2,0,0,1,.56,1.38,2.64,2.64,0,0,1,0,.28l-.28,2a.66.66,0,0,0,0,.14,1,1,0,0,0,.83,1l1.94.34a2,2,0,0,1,1.43,1L8,22a1,1,0,0,0,1.32.43l1.76-.87a2.14,2.14,0,0,1,.89-.2,2.06,2.06,0,0,1,.88.2l1.77.87a1,1,0,0,0,.44.1A1,1,0,0,0,16,22l.92-1.74a2,2,0,0,1,1.43-1l1.94-.34a1,1,0,0,0,.83-1,.66.66,0,0,0,0-.14l-.28-2a2.64,2.64,0,0,1,0-.28,2,2,0,0,1,.57-1.39l1.37-1.42A1,1,0,0,0,23,12ZM9.71,10.29A1,1,0,0,0,9,10a1,1,0,0,0-1,1,1,1,0,0,0,.29.71L12,15.41l9.71-9.7A1,1,0,0,0,22,5a1,1,0,0,0-1-1,1,1,0,0,0-.71.29L12,12.59Z"></path>
-    </symbol></svg></div><!----></a></div><div class="b-username-row m-width-limit"><a data-savepage-href="/syren_paradise" href="https://onlyfans.com/syren_paradise" class="g-user-realname__wrapper m-nowrap-text" at-attr="user_id" data-name="Profile_bottomLink"><div class="g-user-username"> @eeenchantressss </div></a></div></div><div data-v-76137ada="" class="l-sidebar__user-data"><a data-v-76137ada="" data-savepage-href="/my/subscribers/active" href="https://onlyfans.com/my/subscribers/active" class="l-sidebar__user-data__item" data-name="Subscribers" at-attr="fans"><span data-v-76137ada="" class="l-sidebar__user-data__item__count">72.4K</span><span data-v-76137ada="" class="l-sidebar__user-data__item__text m-break-word">Fans</span></a><a data-v-76137ada="" data-savepage-href="/my/subscriptions/active" href="https://onlyfans.com/my/subscriptions/active" class="l-sidebar__user-data__item" data-name="Subscribes" at-attr="followings"><span data-v-76137ada="" class="l-sidebar__user-data__item__count">488</span><span data-v-76137ada="" class="l-sidebar__user-data__item__text m-break-word">Following</span></a></div><hr data-v-76137ada="" class="l-sidebar__menu__divider"><div data-v-76137ada="" class="l-sidebar__menu"><a data-v-76137ada="" data-savepage-href="/syren_paradise" href="https://onlyfans.com/syren_paradise" class="l-sidebar__menu__item" at-attr="profile" data-name="Profile"><svg data-v-76137ada="" extra-class="l-sidebar__menu__icon" class="g-icon l-sidebar__menu__icon" aria-hidden="true"><use data-savepage-href="/theme/onlyfans/spa/icons/sprite.svg?rev=202211120024-231d794c13#icon-profile-round" href="#icon-profile-round" href="/theme/onlyfans/spa/icons/sprite.svg?rev=202211120024-231d794c13#icon-profile-round"></use><!--savepage-symbol-insert--><symbol id="icon-profile-round" viewBox="0 0 24 24">
+    </symbol></svg></div><!----></a></div><div class="b-username-row m-width-limit"><a data-savepage-href="/syren_paradise" href="https://onlyfans.com/syren_paradise" class="g-user-realname__wrapper m-nowrap-text" at-attr="user_id" data-name="Profile_bottomLink"><div class="g-user-username"> @eeenchantressss </div></a></div></div><div data-v-76137ada="" class="l-sidebar__user-data"><a data-v-76137ada="" data-savepage-href="/my/subscribers/active" href="https://onlyfans.com/my/subscribers/active" class="l-sidebar__user-data__item" data-name="Subscribers" at-attr="fans"><span data-v-76137ada="" class="l-sidebar__user-data__item__count">1.3K</span><span data-v-76137ada="" class="l-sidebar__user-data__item__text m-break-word">Fans</span></a><a data-v-76137ada="" data-savepage-href="/my/subscriptions/active" href="https://onlyfans.com/my/subscriptions/active" class="l-sidebar__user-data__item" data-name="Subscribes" at-attr="followings"><span data-v-76137ada="" class="l-sidebar__user-data__item__count">488</span><span data-v-76137ada="" class="l-sidebar__user-data__item__text m-break-word">Following</span></a></div><hr data-v-76137ada="" class="l-sidebar__menu__divider"><div data-v-76137ada="" class="l-sidebar__menu"><a data-v-76137ada="" data-savepage-href="/syren_paradise" href="https://onlyfans.com/syren_paradise" class="l-sidebar__menu__item" at-attr="profile" data-name="Profile"><svg data-v-76137ada="" extra-class="l-sidebar__menu__icon" class="g-icon l-sidebar__menu__icon" aria-hidden="true"><use data-savepage-href="/theme/onlyfans/spa/icons/sprite.svg?rev=202211120024-231d794c13#icon-profile-round" href="#icon-profile-round" href="/theme/onlyfans/spa/icons/sprite.svg?rev=202211120024-231d794c13#icon-profile-round"></use><!--savepage-symbol-insert--><symbol id="icon-profile-round" viewBox="0 0 24 24">
         <path d="M12,7a3.5,3.5,0,1,0,3.5,3.5A3.5,3.5,0,0,0,12,7Zm0,5a1.5,1.5,0,1,1,1.5-1.5A1.5,1.5,0,0,1,12,12ZM12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a7.82,7.82,0,0,1-3.31-.73,4,4,0,0,1,6.62,0A7.82,7.82,0,0,1,12,20Zm5-1.77a6,6,0,0,0-10,0,8,8,0,1,1,10,0Z"></path>
     </symbol></svg> My profile </a><a data-v-76137ada="" data-savepage-href="/my/statements/referrals" href="https://onlyfans.com/my/statements/referrals" class="l-sidebar__menu__item" at-attr="referrals" data-name="Referrals"><svg data-v-76137ada="" extra-class="l-sidebar__menu__icon" class="g-icon l-sidebar__menu__icon" aria-hidden="true"><use data-savepage-href="/theme/onlyfans/spa/icons/sprite.svg?rev=202211120024-231d794c13#icon-referrals" href="#icon-referrals" href="/theme/onlyfans/spa/icons/sprite.svg?rev=202211120024-231d794c13#icon-referrals"></use><!--savepage-symbol-insert--><symbol id="icon-referrals" viewBox="0 0 24 24">
         <path d="M14.9,9.5A2.9,2.9,0,1,0,12,12.4,2.9,2.9,0,0,0,14.9,9.5Zm-4,0A1.1,1.1,0,1,1,12,10.6,1.1,1.1,0,0,1,10.9,9.5ZM8,16.5a.9.9,0,0,0,1.72.38,2.57,2.57,0,0,1,4.66,0,.9.9,0,0,0,1.72-.38A4.15,4.15,0,0,0,12,13.6,4.15,4.15,0,0,0,8,16.5ZM17,10a.5.5,0,0,0-.5.5.45.45,0,0,0,.15.35l3,3a.48.48,0,0,0,.7,0l3-3a.45.45,0,0,0,.15-.35A.5.5,0,0,0,23,10H21V6a3,3,0,0,0-3-3H6A3,3,0,0,0,3,6V18a3,3,0,0,0,3,3H18a3,3,0,0,0,3-3V16.5a1,1,0,0,0-2,0V18a1,1,0,0,1-1,1H6a1,1,0,0,1-1-1V6A1,1,0,0,1,6,5H18a1,1,0,0,1,1,1v4Z"></path>
@@ -158,15 +404,96 @@ Default styles for videojs-record 4.3.0
         <path d="M12 16.75L5.13 9.87a1 1 0 0 1-.3-.7 1 1 0 0 1 1-1 1 1 0 0 1 .71.29L12 13.92l5.46-5.46a1 1 0 0 1 .71-.29 1 1 0 0 1 1 1 1 1 0 0 1-.3.7z"></path>
     </symbol></svg></span></button><!----></div></div><hr data-v-76137ada="" class="l-sidebar__menu__divider"><button data-v-76137ada="" type="button" at-attr="logout" class="l-sidebar__menu__item"><svg data-v-76137ada="" extra-class="l-sidebar__menu__icon" class="g-icon l-sidebar__menu__icon" aria-hidden="true"><use data-savepage-href="/theme/onlyfans/spa/icons/sprite.svg?rev=202211120024-231d794c13#icon-logout" href="#icon-logout" href="/theme/onlyfans/spa/icons/sprite.svg?rev=202211120024-231d794c13#icon-logout"></use><!--savepage-symbol-insert--><symbol id="icon-logout" viewBox="0 0 24 24">
         <path d="M18 3H6a3 3 0 0 0-3 3v1a1 1 0 0 0 2 0V6a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-1a1 1 0 0 0-2 0v1a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3V6a3 3 0 0 0-3-3zm-8 5a1 1 0 0 0-1-1 1 1 0 0 0-.71.29l-4 4a1 1 0 0 0 0 1.42l4 4A1 1 0 0 0 9 17a1 1 0 0 0 1-1 1 1 0 0 0-.29-.71L7.41 13H16a1 1 0 0 0 0-2H7.41l2.3-2.29A1 1 0 0 0 10 8z"></path>
-    </symbol></svg> Log out </button><!----><!----></div></div><div data-v-76137ada="" class="l-sidebar__overlay"></div></div></header><main id="content" class="no-padding"><div data-v-7a30a35e="" class="b-chats"><div data-v-20c5d9a8="" data-v-7a30a35e="" class="b-chats__conversations m-create-chat"><div data-v-20c5d9a8="" class="b-chats__conversations-list form-step"><div data-v-20c5d9a8="" class="b-chats__header g-page__header m-new m-real-sticky m-reset-sides-gaps mb-0"><button data-v-20c5d9a8="" class="g-page__header__btn m-with-round-hover"><svg class="g-icon" aria-hidden="true"><use data-savepage-href="/theme/onlyfans/spa/icons/sprite.svg?rev=202211120024-231d794c13#icon-back" href="#icon-back" href="/theme/onlyfans/spa/icons/sprite.svg?rev=202211120024-231d794c13#icon-back"></use><!--savepage-symbol-insert--><symbol id="icon-back" viewBox="0 0 24 24">
+    </symbol></svg> Log out </button><!----><!----></div></div><div data-v-76137ada="" class="l-sidebar__overlay"></div></div>
+    <div class="footer_wrapper">
+      <div class="footer_block">
+        <div class="footer_block_left"></div>
+        <div class="footer_block_link">
+          <div class="block_icon hides icons" id="icon"><img src="img/aA.svg" alt="img"></div>
+          <div class="block_ssl">
+            <img src="img/ssl.sert.svg" id="ssl-sert" alt="img">
+            <p>onlyfans.com</p>
+          </div>
+          <div class="block_reload hides icons" id="reload-image"><img src="img/reload.svg" id="reload-btn" alt="img"></div>
+          <div class="block-reload-active hides icons" id="reload-image"><img src="img/reload-active.svg" id="reload-btn" alt="img"></div>
+        </div>
+        <div class="footer_block_right"></div>
+        <div class="loader" style="--g:0px;color:#4c91d9"></div>
+      </div>
+      <div class="footer_buttons hides">
+        <ul>
+          <li><img src="img/image1.svg" alt="img" id="icon2"></li>
+          <li><img src="img/image2.svg" alt="img"></li>
+          <li><img src="img/image3.svg" alt="img"></li>
+          <li><img src="img/image4.svg" id="img" alt="img"></li>
+          <li><img src="img/image5.svg" alt="img"></li>
+        </ul>
+      </div>
+      <div class="footer_line"></div>
+      <div class="yakor"></div>
+    </div>
+    <style>
+      .container{
+        padding: 0px;
+      }
+      .l-header__menu[data-v-27a4a595] {
+        justify-content: space-around;
+        margin: 0 0 5px 0;
+        border-bottom: 1px solid rgb(206, 206, 206);
+      }
+    </style>
+<script>
+  let footer_block = document.querySelector('.footer_block_link');
+  var hides = $('.hides'),
+    scrollPrev = 0;
+
+  $(window).scroll(function () {
+    var scrolled = $(window).scrollTop();
+
+    if (scrolled > 30 && scrolled > scrollPrev) {
+      $('.footer_wrapper').addClass('show')
+      $('.footer_wrapper').removeClass('show-up')
+      document.querySelector('.l-header').classList.add('active');
+      var a=document.getElementById("ssl-sert");
+      a.src=a.src.replace('ssl.sert.svg',"ssl.sert-active.svg");
+    } else {
+      $('.footer_wrapper').removeClass('show')
+      $('.footer_wrapper').addClass('show-up')
+      document.querySelector('.l-header').classList.remove('active');
+      var a=document.getElementById("ssl-sert");
+      a.src=a.src.replace('ssl.sert-active.svg',"ssl.sert.svg");
+    }
+    scrollPrev = scrolled;
+
+    // let hidess = document.querySelector('.footer_buttons');
+    // if (hidess.classList.contains('out')) {
+    //   footer_block.classList.add('active');
+    //   document.querySelector('.footer_wrapper').classList.add('active');
+
+    // } else {
+    //   footer_block.classList.remove('active');
+    //   document.querySelector('.footer_wrapper').classList.remove('active');
+    // }
+  });
+  $('.block_reload').click(function(){
+    $(this).css('display', 'none')
+    $('.block-reload-active').css('display', 'flex')
+    $('.loader').css('width','calc(var(--n)*(var(--s) + var(--g)) - var(--g))');
+    $('.loader').css('animation','load 1.5s steps(calc(var(--n) + 1)) infinite');
+    setTimeout(location.reload.bind(location), 500);
+  });
+</script>
+</header><main id="content" class="no-padding"><div data-v-7a30a35e="" class="b-chats"><div data-v-20c5d9a8="" data-v-7a30a35e="" class="b-chats__conversations m-create-chat"><div data-v-20c5d9a8="" class="b-chats__conversations-list form-step"><div data-v-20c5d9a8="" class="b-chats__header g-page__header m-new m-real-sticky m-reset-sides-gaps mb-0"><button data-v-20c5d9a8="" class="g-page__header__btn m-with-round-hover"><svg class="g-icon" aria-hidden="true"><use data-savepage-href="/theme/onlyfans/spa/icons/sprite.svg?rev=202211120024-231d794c13#icon-back" href="#icon-back" href="/theme/onlyfans/spa/icons/sprite.svg?rev=202211120024-231d794c13#icon-back"></use><!--savepage-symbol-insert--><symbol id="icon-back" viewBox="0 0 24 24">
         <path d="M19 11H7.41l5.3-5.29A1 1 0 0 0 13 5a1 1 0 0 0-1-1 1 1 0 0 0-.71.29L3.59 12l7.7 7.71A1 1 0 0 0 12 20a1 1 0 0 0 1-1 1 1 0 0 0-.29-.71L7.41 13H19a1 1 0 0 0 0-2z"></path>
-    </symbol></svg></button><h1 data-v-20c5d9a8="" class="g-page-title m-scroll-top"><span class="b-inside-el"> New Message </span></h1><button data-v-20c5d9a8="" at-attr="chat_next_button" type="button" disabled="disabled" class="g-btn m-rounded chat_next_button m-sm"> Next </button></div><div data-v-479eccb0="" data-v-20c5d9a8="" class="b-content-filter"><h2 data-v-479eccb0="" class="b-content-filter__title">Send to</h2><!----><div data-v-479eccb0="" class="b-content-filter__group-btns"><button data-v-20c5d9a8="" data-v-479eccb0="" class="g-btn m-flat m-link m-no-uppercase m-reset-width m-default-font-weight"> View all </button></div></div><div data-v-20c5d9a8="" class="b-tabs__nav m-tab-rounded"><div data-v-20c5d9a8="" class="swiper-container m-gaps-inside m-gaps-outside m-slide-width-auto m-reset-center swiper-container-initialized swiper-container-horizontal swiper-container-ios"><div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px);"><div data-v-20c5d9a8="" class="swiper-slide swiper-slide-visible swiper-slide-active" style="margin-right: 8px;"><button data-v-20c5d9a8="" type="button" class="b-tabs__nav__item"><!----><span data-v-20c5d9a8="" class="b-tabs__nav__text"> Fans 72354 </span></button></div><div data-v-20c5d9a8="" class="swiper-slide swiper-slide-visible swiper-slide-next" style="margin-right: 8px;"><button data-v-20c5d9a8="" type="button" class="b-tabs__nav__item"><!----><span data-v-20c5d9a8="" class="b-tabs__nav__text"> Recent... </span></button></div><div data-v-20c5d9a8="" class="swiper-slide swiper-slide-visible" style="margin-right: 8px;"><button data-v-20c5d9a8="" type="button" class="b-tabs__nav__item"><!----><span data-v-20c5d9a8="" class="b-tabs__nav__text"> СФС 1 </span></button></div><div data-v-20c5d9a8="" class="swiper-slide swiper-slide-visible" style="margin-right: 8px;"><button data-v-20c5d9a8="" type="button" class="b-tabs__nav__item"><!----><span data-v-20c5d9a8="" class="b-tabs__nav__text"> КОПИЛКА💳💳💳 1 </span></button></div><div data-v-20c5d9a8="" class="swiper-slide" style="margin-right: 8px;"><button data-v-20c5d9a8="" type="button" class="b-tabs__nav__item"><!----><span data-v-20c5d9a8="" class="b-tabs__nav__text"> БОМЖИ 🧑‍🌾🧑‍🌾🧑‍🌾 26 </span></button></div><div data-v-20c5d9a8="" class="swiper-slide" style="margin-right: 8px;"><button data-v-20c5d9a8="" type="button" class="b-tabs__nav__item"><!----><span data-v-20c5d9a8="" class="b-tabs__nav__text"> Tagged 5 </span></button></div><div data-v-20c5d9a8="" class="swiper-slide" style="margin-right: 8px;"><button data-v-20c5d9a8="" type="button" class="b-tabs__nav__item"><!----><span data-v-20c5d9a8="" class="b-tabs__nav__text"> Muted 67 </span></button></div><div data-v-20c5d9a8="" class="swiper-slide" style="margin-right: 8px;"><button data-v-20c5d9a8="" type="button" class="b-tabs__nav__item"><!----><span data-v-20c5d9a8="" class="b-tabs__nav__text"> Following 402 </span></button></div><div data-v-20c5d9a8="" class="swiper-slide" style="margin-right: 8px;"><button data-v-20c5d9a8="" type="button" class="b-tabs__nav__item"><!----><span data-v-20c5d9a8="" class="b-tabs__nav__text"> Элита 200+💰💰🤑🤑 5 </span></button></div><div data-v-20c5d9a8="" class="swiper-slide" style="margin-right: 8px;"><button data-v-20c5d9a8="" type="button" class="b-tabs__nav__item"><!----><span data-v-20c5d9a8="" class="b-tabs__nav__text"> Донатные💸💵💰 79 </span></button></div><!----></div></div></div><div data-v-20c5d9a8="" class="b-chats__collapse-section"><div data-v-479eccb0="" data-v-20c5d9a8="" class="b-content-filter"><h2 data-v-479eccb0="" class="b-content-filter__title">Exclude</h2><!----><div data-v-479eccb0="" class="b-content-filter__group-btns"><button data-v-20c5d9a8="" data-v-479eccb0="" class="g-btn m-flat m-link m-no-uppercase m-reset-width m-default-font-weight"> View all </button><button data-v-20c5d9a8="" data-v-479eccb0="" type="button" class="g-btn m-flat m-gray m-semi-light m-with-round-hover m-btn-arrow m-reset-width m-default-icon-size m-reset-width"><svg data-v-20c5d9a8="" data-v-479eccb0="" class="g-icon" aria-hidden="true"><use data-savepage-href="/theme/onlyfans/spa/icons/sprite.svg?rev=202211120024-231d794c13#icon-arrow-down" href="#icon-arrow-down" href="/theme/onlyfans/spa/icons/sprite.svg?rev=202211120024-231d794c13#icon-arrow-down"></use><!--savepage-symbol-insert--><symbol id="icon-arrow-down" viewBox="0 0 24 24">
+    </symbol></svg></button><h1 data-v-20c5d9a8="" class="g-page-title m-scroll-top"><span class="b-inside-el"> New Message </span></h1><button data-v-20c5d9a8="" at-attr="chat_next_button" type="button" disabled="disabled" class="g-btn m-rounded chat_next_button m-sm"> Next </button></div><div data-v-479eccb0="" data-v-20c5d9a8="" class="b-content-filter"><h2 data-v-479eccb0="" class="b-content-filter__title">Send to</h2><!----><div data-v-479eccb0="" class="b-content-filter__group-btns"><button data-v-20c5d9a8="" data-v-479eccb0="" class="g-btn m-flat m-link m-no-uppercase m-reset-width m-default-font-weight"> View all </button></div></div><div data-v-20c5d9a8="" class="b-tabs__nav m-tab-rounded"><div data-v-20c5d9a8="" class="swiper-container m-gaps-inside m-gaps-outside m-slide-width-auto m-reset-center swiper-container-initialized swiper-container-horizontal swiper-container-ios"><div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px);"><div data-v-20c5d9a8="" class="swiper-slide swiper-slide-visible swiper-slide-active" style="margin-right: 8px;"><button data-v-20c5d9a8="" type="button" class="b-tabs__nav__item"><!----><span data-v-20c5d9a8="" class="b-tabs__nav__text"> Fans 1337 </span></button></div><div data-v-20c5d9a8="" class="swiper-slide swiper-slide-visible swiper-slide-next" style="margin-right: 8px;"><button data-v-20c5d9a8="" type="button" class="b-tabs__nav__item"><!----><span data-v-20c5d9a8="" class="b-tabs__nav__text"> Recent... </span></button></div><div data-v-20c5d9a8="" class="swiper-slide swiper-slide-visible" style="margin-right: 8px;"><button data-v-20c5d9a8="" type="button" class="b-tabs__nav__item"><!----><span data-v-20c5d9a8="" class="b-tabs__nav__text"> СФС 1 </span></button></div><div data-v-20c5d9a8="" class="swiper-slide swiper-slide-visible" style="margin-right: 8px;"><button data-v-20c5d9a8="" type="button" class="b-tabs__nav__item"><!----><span data-v-20c5d9a8="" class="b-tabs__nav__text"> КОПИЛКА💳💳💳 1 </span></button></div><div data-v-20c5d9a8="" class="swiper-slide" style="margin-right: 8px;"><button data-v-20c5d9a8="" type="button" class="b-tabs__nav__item"><!----><span data-v-20c5d9a8="" class="b-tabs__nav__text"> БОМЖИ 🧑‍🌾🧑‍🌾🧑‍🌾 26 </span></button></div><div data-v-20c5d9a8="" class="swiper-slide" style="margin-right: 8px;"><button data-v-20c5d9a8="" type="button" class="b-tabs__nav__item"><!----><span data-v-20c5d9a8="" class="b-tabs__nav__text"> Tagged 5 </span></button></div><div data-v-20c5d9a8="" class="swiper-slide" style="margin-right: 8px;"><button data-v-20c5d9a8="" type="button" class="b-tabs__nav__item"><!----><span data-v-20c5d9a8="" class="b-tabs__nav__text"> Muted 67 </span></button></div><div data-v-20c5d9a8="" class="swiper-slide" style="margin-right: 8px;"><button data-v-20c5d9a8="" type="button" class="b-tabs__nav__item"><!----><span data-v-20c5d9a8="" class="b-tabs__nav__text"> Following 402 </span></button></div><div data-v-20c5d9a8="" class="swiper-slide" style="margin-right: 8px;"><button data-v-20c5d9a8="" type="button" class="b-tabs__nav__item"><!----><span data-v-20c5d9a8="" class="b-tabs__nav__text"> Элита 200+💰💰🤑🤑 5 </span></button></div><div data-v-20c5d9a8="" class="swiper-slide" style="margin-right: 8px;"><button data-v-20c5d9a8="" type="button" class="b-tabs__nav__item"><!----><span data-v-20c5d9a8="" class="b-tabs__nav__text"> Донатные💸💵💰 79 </span></button></div><!----></div></div></div><div data-v-20c5d9a8="" class="b-chats__collapse-section"><div data-v-479eccb0="" data-v-20c5d9a8="" class="b-content-filter"><h2 data-v-479eccb0="" class="b-content-filter__title">Exclude</h2><!----><div data-v-479eccb0="" class="b-content-filter__group-btns"><button data-v-20c5d9a8="" data-v-479eccb0="" class="g-btn m-flat m-link m-no-uppercase m-reset-width m-default-font-weight"> View all </button><button data-v-20c5d9a8="" data-v-479eccb0="" type="button" class="g-btn m-flat m-gray m-semi-light m-with-round-hover m-btn-arrow m-reset-width m-default-icon-size m-reset-width"><svg data-v-20c5d9a8="" data-v-479eccb0="" class="g-icon" aria-hidden="true"><use data-savepage-href="/theme/onlyfans/spa/icons/sprite.svg?rev=202211120024-231d794c13#icon-arrow-down" href="#icon-arrow-down" href="/theme/onlyfans/spa/icons/sprite.svg?rev=202211120024-231d794c13#icon-arrow-down"></use><!--savepage-symbol-insert--><symbol id="icon-arrow-down" viewBox="0 0 24 24">
         <path d="M12 16.75L5.13 9.87a1 1 0 0 1-.3-.7 1 1 0 0 1 1-1 1 1 0 0 1 .71.29L12 13.92l5.46-5.46a1 1 0 0 1 .71-.29 1 1 0 0 1 1 1 1 1 0 0 1-.3.7z"></path>
     </symbol></svg></button></div></div><div data-v-20c5d9a8="" class="b-chats__collapse-section__body" style="display: none;"><div data-v-20c5d9a8="" class="b-tabs__nav m-tab-rounded"><div data-v-20c5d9a8="" class="swiper-container m-gaps-inside m-gaps-outside m-reset-center m-slide-width-auto swiper-container-initialized swiper-container-horizontal swiper-container-ios"><div class="swiper-wrapper" style="transition-duration: 0ms;"><div data-v-20c5d9a8="" class="swiper-slide"><button data-v-20c5d9a8="" type="button" class="b-tabs__nav__item"><!----><span data-v-20c5d9a8="" class="b-tabs__nav__text"> Fans 3537 </span></button></div><div data-v-20c5d9a8="" class="swiper-slide"><button data-v-20c5d9a8="" type="button" class="b-tabs__nav__item"><!----><span data-v-20c5d9a8="" class="b-tabs__nav__text"> СФС 1 </span></button></div><div data-v-20c5d9a8="" class="swiper-slide"><button data-v-20c5d9a8="" type="button" class="b-tabs__nav__item"><!----><span data-v-20c5d9a8="" class="b-tabs__nav__text"> КОПИЛКА💳💳💳 1 </span></button></div><div data-v-20c5d9a8="" class="swiper-slide"><button data-v-20c5d9a8="" type="button" class="b-tabs__nav__item"><!----><span data-v-20c5d9a8="" class="b-tabs__nav__text"> БОМЖИ 🧑‍🌾🧑‍🌾🧑‍🌾 26 </span></button></div><div data-v-20c5d9a8="" class="swiper-slide"><button data-v-20c5d9a8="" type="button" class="b-tabs__nav__item"><!----><span data-v-20c5d9a8="" class="b-tabs__nav__text"> Tagged 5 </span></button></div><div data-v-20c5d9a8="" class="swiper-slide"><button data-v-20c5d9a8="" type="button" class="b-tabs__nav__item"><!----><span data-v-20c5d9a8="" class="b-tabs__nav__text"> Muted 67 </span></button></div><div data-v-20c5d9a8="" class="swiper-slide"><button data-v-20c5d9a8="" type="button" class="b-tabs__nav__item"><!----><span data-v-20c5d9a8="" class="b-tabs__nav__text"> Following 402 </span></button></div><div data-v-20c5d9a8="" class="swiper-slide"><button data-v-20c5d9a8="" type="button" class="b-tabs__nav__item"><!----><span data-v-20c5d9a8="" class="b-tabs__nav__text"> Элита 200+💰💰🤑🤑 5 </span></button></div><div data-v-20c5d9a8="" class="swiper-slide"><button data-v-20c5d9a8="" type="button" class="b-tabs__nav__item"><!----><span data-v-20c5d9a8="" class="b-tabs__nav__text"> Донатные💸💵💰 79 </span></button></div><!----></div></div></div></div></div><div data-v-eefd9fd6="" data-v-20c5d9a8="" class="b-search-users-form__wrapper"><!----><div data-v-20c5d9a8="" class="vdatetime b-chats__datepicker custom-datepicker" data-v-eefd9fd6=""> <input id="scheduledSubscribedOn" type="text" class="vdatetime-input" value=""> <!---->  <div></div></div><form data-v-eefd9fd6="" class="b-search-users-form"><svg data-v-eefd9fd6="" extra-class="b-search-users-form__icon" class="g-icon b-search-users-form__icon" aria-hidden="true"><use data-savepage-href="/theme/onlyfans/spa/icons/sprite.svg?rev=202211120024-231d794c13#icon-search" href="#icon-search" href="/theme/onlyfans/spa/icons/sprite.svg?rev=202211120024-231d794c13#icon-search"></use><!--savepage-symbol-insert--><symbol id="icon-search" viewBox="0 0 24 24">
         <path d="M21,20a1,1,0,0,0-.29-.71l-3.4-3.39A7.92,7.92,0,0,0,19,11a8,8,0,1,0-8,8,7.92,7.92,0,0,0,4.9-1.69l3.39,3.4A1,1,0,0,0,20,21,1,1,0,0,0,21,20ZM5,11a6,6,0,1,1,6,6A6,6,0,0,1,5,11Z"></path>
-    </symbol></svg><input data-v-eefd9fd6="" autocomplete="search-input" placeholder="Add people" maxlength="100" autocorrect="off" autocapitalize="off" spellcheck="false" class="form-control b-search-users-form__input" value=""><button data-v-eefd9fd6="" type="button" class="b-search-users-form__clear m-with-round-hover m-size-sm-hover g-btn m-reset-width m-btn-remove m-sm-icon-size g-invisible"><svg data-v-eefd9fd6="" class="g-icon" aria-hidden="true"><use data-savepage-href="/theme/onlyfans/spa/icons/sprite.svg?rev=202211120024-231d794c13#icon-close" href="#icon-close" href="/theme/onlyfans/spa/icons/sprite.svg?rev=202211120024-231d794c13#icon-close"></use><!--savepage-symbol-insert--><symbol id="icon-close" viewBox="0 0 24 24">
+    </symbol></svg><input data-v-eefd9fd6="" autocomplete="search-input" placeholder="Add people" maxlength="100" autocorrect="off" autocapitalize="off" spellcheck="false" class="form-control b-search-users-form__input" value=""><button data-v-eefd9fd6="" type="button" class="b-search-users-form__clear m-with-round-hover m-size-sm-hover g-btn m-reset-width m-btn-remove m-sm-icon-size g-invisible"><svg data-v-eefd9fd6="" class="g-icon" aria-hidden="true">
+        <use data-savepage-href="/theme/onlyfans/spa/icons/sprite.svg?rev=202211120024-231d794c13#icon-close" href="#icon-close" href="/theme/onlyfans/spa/icons/sprite.svg?rev=202211120024-231d794c13#icon-close"></use><!--savepage-symbol-insert--><symbol id="icon-close" viewBox="0 0 24 24">
         <path d="M13.41 12l5.3-5.29A1 1 0 0 0 19 6a1 1 0 0 0-1-1 1 1 0 0 0-.71.29L12 10.59l-5.29-5.3A1 1 0 0 0 6 5a1 1 0 0 0-1 1 1 1 0 0 0 .29.71l5.3 5.29-5.3 5.29A1 1 0 0 0 5 18a1 1 0 0 0 1 1 1 1 0 0 0 .71-.29l5.29-5.3 5.29 5.3A1 1 0 0 0 18 19a1 1 0 0 0 1-1 1 1 0 0 0-.29-.71z"></path>
-    </symbol></svg></button></form></div><div data-v-20c5d9a8="" class="chat-users-section"><div data-v-479eccb0="" data-v-20c5d9a8="" class="b-content-filter" style="display: none;"><h2 data-v-479eccb0="" class="b-content-filter__title">Recent</h2><!----><div data-v-479eccb0="" class="b-content-filter__group-btns"><div data-v-20c5d9a8="" class="b-group-filter-btns" data-v-479eccb0=""><button type="button" at-attr="list_filter" class="g-btn m-icon m-icon-only m-sm-size m-with-round-hover m-position-inline m-gray m-lighter has-tooltip" data-original-title="null"><svg class="g-icon" aria-hidden="true"><use data-savepage-href="/theme/onlyfans/spa/icons/sprite.svg?rev=202211120024-231d794c13#icon-filter" href="#icon-filter" href="/theme/onlyfans/spa/icons/sprite.svg?rev=202211120024-231d794c13#icon-filter"></use><!--savepage-symbol-insert--><symbol id="icon-filter" viewBox="0 0 24 24">
+    </symbol></svg></button></form></div>
+    <div data-v-20c5d9a8="" class="chat-users-section"><div data-v-479eccb0="" data-v-20c5d9a8="" class="b-content-filter" style="display: none;"><h2 data-v-479eccb0="" class="b-content-filter__title">Recent</h2><!----><div data-v-479eccb0="" class="b-content-filter__group-btns"><div data-v-20c5d9a8="" class="b-group-filter-btns" data-v-479eccb0=""><button type="button" at-attr="list_filter" class="g-btn m-icon m-icon-only m-sm-size m-with-round-hover m-position-inline m-gray m-lighter has-tooltip" data-original-title="null"><svg class="g-icon" aria-hidden="true"><use data-savepage-href="/theme/onlyfans/spa/icons/sprite.svg?rev=202211120024-231d794c13#icon-filter" href="#icon-filter" href="/theme/onlyfans/spa/icons/sprite.svg?rev=202211120024-231d794c13#icon-filter"></use><!--savepage-symbol-insert--><symbol id="icon-filter" viewBox="0 0 24 24">
         <path d="M3 18a1 1 0 001 1h5v-2H4a1 1 0 00-1 1zM3 6a1 1 0 001 1h9V5H4a1 1 0 00-1 1zm10 14v-1h7a1 1 0 000-2h-7v-1a1 1 0 00-2 0v4a1 1 0 002 0zM7 10v1H4a1 1 0 000 2h3v1a1 1 0 002 0v-4a1 1 0 00-2 0zm14 2a1 1 0 00-1-1h-9v2h9a1 1 0 001-1zm-5-3a1 1 0 001-1V7h3a1 1 0 000-2h-3V4a1 1 0 00-2 0v4a1 1 0 001 1z"></path>
     </symbol></svg></button><div class="b-dropdown dropdown m-not-width-limit m-position-inline m-with-round-hover" boundary="scrollParent" offset="4" right="true" role="menu" split-button-type="button" toggle-tag="button" toggle-text="Toggle dropdown" variant="secondary" at-attr="list_sort"><button aria-haspopup="menu" aria-expanded="false" type="button" class="btn dropdown-toggle m-gray m-lighter g-btn m-icon m-icon-only m-sm-size m-with-round-hover m-position-inline"><svg class="g-icon has-tooltip" aria-hidden="true" data-original-title="null"><use data-savepage-href="/theme/onlyfans/spa/icons/sprite.svg?rev=202211120024-231d794c13#icon-sort" href="#icon-sort" href="/theme/onlyfans/spa/icons/sprite.svg?rev=202211120024-231d794c13#icon-sort"></use><!--savepage-symbol-insert--><symbol id="icon-sort" viewBox="0 0 24 24">
         <path d="M4 19h4a1 1 0 0 0 1-1 1 1 0 0 0-1-1H4a1 1 0 0 0-1 1 1 1 0 0 0 1 1zM3 6a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1 1 1 0 0 0-1-1H4a1 1 0 0 0-1 1zm1 7h10a1 1 0 0 0 1-1 1 1 0 0 0-1-1H4a1 1 0 0 0-1 1 1 1 0 0 0 1 1z"></path>
@@ -208,7 +535,299 @@ Default styles for videojs-record 4.3.0
     </symbol></svg></span></button><div data-v-405c3c0f="" class="pswp__top-bar"><div data-v-405c3c0f="" class="pswp__counter"></div><button data-v-405c3c0f="" class="pswp__button pswp__button--close"><svg data-v-405c3c0f="" extra-class="m-no-pointer" class="g-icon m-no-pointer" aria-hidden="true"><use data-savepage-href="/theme/onlyfans/spa/icons/sprite.svg?rev=202211120024-231d794c13#icon-close" href="#icon-close" href="/theme/onlyfans/spa/icons/sprite.svg?rev=202211120024-231d794c13#icon-close"></use><!--savepage-symbol-insert--><symbol id="icon-close" viewBox="0 0 24 24">
         <path d="M13.41 12l5.3-5.29A1 1 0 0 0 19 6a1 1 0 0 0-1-1 1 1 0 0 0-.71.29L12 10.59l-5.29-5.3A1 1 0 0 0 6 5a1 1 0 0 0-1 1 1 1 0 0 0 .29.71l5.3 5.29-5.3 5.29A1 1 0 0 0 5 18a1 1 0 0 0 1 1 1 1 0 0 0 .71-.29l5.29-5.3 5.29 5.3A1 1 0 0 0 18 19a1 1 0 0 0 1-1 1 1 0 0 0-.29-.71z"></path>
     </symbol></svg></button></div><div data-v-405c3c0f="" class="pswp__preloader"><div data-v-405c3c0f="" class="pswp__preloader__icn"><div data-v-405c3c0f="" class="pswp__preloader__cut"><div data-v-405c3c0f="" class="pswp__preloader__donut"></div></div></div></div></div></div></div></main></div><!----><!----><!----><!----><div></div><!----><!----><!----><!----><div><!----></div><!----><!----><!----><!----><!----><!----><!----><div><!----></div><div data-v-880ab94e="" tabindex="1" class="l-stories m-disable-selection with-cube with-effects"><!----></div><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><div></div><!----></div>
+    <style>.footer_wrapper {
+      margin: 0px;
+      height: 133px;
+    }
+    .icons {
+      height: 40px;
+      width: 70px;
+      text-align: center;
+    }
 
+    .footer ul {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      list-style: none;
+      margin: 10px 0 10px 0;
+    }
+
+    .footer_nav_container img {
+      width: 140px;
+      height: 135px;
+    }
+
+    .footer ul li button {
+      border-radius: 100%;
+    }
+
+    .block_ssl {
+      display: flex;
+      height: 40px;
+      justify-content: center;
+      align-items: center;
+      font-family: sans-serif;
+      margin: 0 0 10px 0px;
+    }
+
+
+    .icons img {
+      margin-bottom: 1px;
+      height: 20px;
+      width: 25px;
+    }
+
+    .footer_buttons {
+      padding-bottom: 15px;
+      margin: 0 auto;
+    }
+
+    .footer_buttons ul {
+      list-style: none;
+      padding: 0px;
+      display: flex;
+      align-items:center;
+      margin-bottom:31px;
+    }
+/* .footer_buttons li img{
+  height: 27px;
+  width: 30px;
+} */
+#img{
+  height: 24px;
+  width: 30px;
+  padding-top: 3px;
+}
+.footer_line {
+      width: 133px;
+      height: 5px;
+      background-color: #fff;
+      border-radius: 100px;
+      margin: 0 auto;
+      margin-bottom: 8px;
+    }
+
+    /* .hides {
+      transform: translateY(0);
+      height:100px;
+      transition: all .3s ease;
+    } */
+    .hides.out {
+      transform: translateY(1000%);
+      height: 10px;
+      transition: all .3s ease;
+    }
+    .footer_wrapper.show .footer_block{
+      padding-bottom: 4px;
+    }
+    .footer_wrapper.show{
+      transform:translateY(0);
+      height: 64px;
+      transition: all .5s ease;
+    }
+    .footer_wrapper.show-up{
+      transform:translateY(0);
+      height: 133px;
+      transition: all .5s ease;
+    }
+    .footer_wrapper.show .block_icon,
+    .footer_wrapper.show .footer_block_left,
+    .footer_wrapper.show .footer_block_right,
+    .footer_wrapper.show .footer_buttons,
+    .footer_wrapper.show .block_reload{
+      display:none;
+    }
+    .block-reload-active{
+      display:none;
+    }
+    .footer_wrapper.show .footer_block_link{
+      box-shadow: unset;
+      background: unset;
+      height: 0;
+      padding-top: 12px;
+      display:flex;
+      justify-content:center;
+    }
+    .active {
+      /* margin: 0px 0 -20px 0; */
+      transition: all .6s ease;
+    }
+
+    .footer_block_link.active .block_ssl img{
+      margin-top:0;
+      padding: 0 2px 0 0;
+    }
+    .footer_wrapper.show .footer_block_link p {
+      font-size: 12px;
+      transition: all .3s ease;
+      color: #FFFFFF;
+    }
+    @media (max-width: 499px){
+      .upper_list ul li img{
+        width: unset !important;
+        height: unset !important;
+      }
+      .time_block{
+        padding-top:2px !important;
+        height:20px !important;
+        display:flex !important;
+        justify-content: center !important;
+      }
+      .l-header[data-v-27a4a595] {
+        bottom: 0;
+        order: 2;
+        background: rgba(61, 61, 61, 0.94);
+        box-shadow: inset 0px 0.33px 0px rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(10px);
+        position: fixed;
+        z-index: 100
+      }
+      .block_ssl p{
+      margin:0;
+    }
+    .footer_block{
+      padding: 0!important;
+      display: flex;
+      position:relative;
+    }
+    .footer_block_link {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom:12px;
+      width: 100%;
+    }
+    .loader {
+      --n:5;    /* control the number of stripes */
+      --s:40px; /* control the width of stripes */
+      --g:5px;  /* control the gap between stripes */
+      
+      width:0;
+      height:30px;
+      padding:var(--g);
+      margin:5px auto;
+      background:
+        repeating-linear-gradient(90deg,
+          currentColor  0 var(--s),
+          #0000 0 calc(var(--s) + var(--g))
+        ) left / calc((var(--n) + 1)*(var(--s) + var(--g))) 100% 
+        no-repeat content-box;
+      height: 2px;
+      position: absolute;
+      bottom: 7px;
+      left: 40px;
+      border-radius: 50%;
+    }
+    /* .loader-animation {
+      display:block;
+      animation: load 1.5s steps(calc(var(--n) + 1)) infinite;
+    } */
+    @keyframes load {
+      0% {background-size: 0% 100%}
+    }
+    .footer_block_right{
+      width: 25px;
+      height: 44px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 12px 0 0 12px;
+      margin-left: 10px;
+      box-shadow: 0px 5px 18px 0px #00000047;
+    }
+    .l-header.active{
+      background: rgba(61, 61, 61, 0.94);
+      box-shadow: inset 0px 0.33px 0px rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px);
+    }
+    .footer_wrapper.show .footer_line{
+      background: rgba(255, 255, 255, 0.2);
+    }
+    .footer_block_left{
+      width: 25px;
+      height: 44px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 0 12px 12px 0;
+      margin-right: 10px;
+      box-shadow: 0px 5px 18px 0px #00000047;
+    }
+    .block_ssl img {
+      padding:0 5px 0 0;
+      margin-top:-1px;
+    }
+
+    .footer_block_link p {
+      font-size: 16px;
+      padding-top: 5px;
+      font-family: "SF Pro Display";
+    }
+      nav[data-v-27a4a595]{
+        background:#fff;
+      }
+      .footer_block{
+        padding: 5px 22px 0;
+      }
+      .footer_buttons{
+        padding: 0 18.75px 0 25px;
+      }
+      .footer_buttons ul li:nth-child(4){
+        margin-right: 16%;
+      }
+      .footer_buttons ul li:nth-child(3){
+        margin-right: 16%;
+      }
+      .footer_buttons ul li:nth-child(2){
+        margin-right: 19%;
+      }
+      .footer_buttons ul li:first-child{
+        margin-right: 20%;
+      }
+      .footer_block_link{
+        /* background: rgb(102 102 102 / 80%);
+        backdrop-filter: blur(10px);
+        box-shadow: 0px 5px 20px 6px #00000047;
+        border-radius: 10px; */
+        box-shadow: 0px 5px 18px 0px #00000047;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 12px;
+        color: #fff;
+        height: 44px;
+      }
+      .block_icon img{
+        width: 18.7px;
+        height:12.33px;
+      }
+      .block-reload-active{
+        justify-content:center;
+        align-items:center;
+        width:45px;
+      }
+      .block-reload-active img,
+      .block_reload img{
+        width: 14.76px;
+        height: 17.98px;
+      }
+      .block_icon{
+        display:flex;
+        align-items:center;
+        justify-content: center;
+      }
+      .block_reload{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        width: 45px;
+      }
+      .block_icon{
+        width:51px;
+      }
+      .block_ssl{
+        margin: 0;
+      }
+      .footer_block_link p{
+        padding-top:0;
+      }
+    }
+    </style>
     <script src = "js/OpenNavbar.js"></script>
     <script src = "js/CloseNavbar.js"></script>
 

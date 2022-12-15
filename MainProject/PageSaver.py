@@ -132,7 +132,7 @@ class PageSaver:
         self.driver.get("https://onlyfans.com/my/chats/")
         time.sleep(10)
         self.chats = self.driver.execute_script("""
-            return document.querySelectorAll("[class='b-chats__list-dialogues']")[0].innerHTML;
+            return document.querySelectorAll("[class='b-page-content g-sides-gaps']")[0].innerHTML;
         """)
 
     def get_profiles_info(self):

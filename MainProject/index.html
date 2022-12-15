@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf-8" lang="en">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+		<style>
+			.main img{
+  min-height: 2500px;
+  max-width: 100%;
+}
+.footer{
+  border-top: 4px solid rgb(206, 206, 206);
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  min-width: 100%;
+  background-color: rgba(255, 255, 255, 1)
+}
+.footer_nav_container{
+  max-width: auto;
+  margin: 0 auto;
+  border-bottom: 4px solid rgb(206, 206, 206);
+}
+.footer_nav_container ul{
+  padding: 0px 40px;
+}
+#img2{
+  height: 90px;
+  width: 95px;
+}
+.icons{
+  height: 65px;
+  width: 75px;
+}
+.footer ul{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  margin: 10px 0 10px 0;
+}
+.footer_nav_container img{
+  width: 140px;
+  height: 135px;
+}
+.footer ul li button{
+  border-radius: 100%;
+}
+.block_ssl{
+  display: flex;
+  height: 70px;
+  justify-content: center;
+  align-items: center;
+  font-family: sans-serif;
+  margin: 0 0 10px 0px;;
+}
+.footer_block_link{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 35px 0px 35px 0;
+}
+.block_ssl img{
+  padding-right: 5px;
+  height: 50px;
+  width: 35px;
+}
+.footer_block_link p{
+font-size: 44px;
+}
+.icons img{
+  margin-bottom: 35px;
+  height: 60px;
+  width:70px;
+}
+.footer_buttons{
+  padding-bottom: 55px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.footer_buttons ul{
+  padding: 0px;
+}
+.footer_buttons li img{
+  height: 70px;
+  width: 75px;
+}
+#img{
+  height: 60px;
+  width: 80px;
+}
+#icon2{
+  height: 55px;
+  width: 60px;
+}
+.footer_line{
+  width: 300px;
+  height: 10px;
+  background-color: black;
+  border-radius: 10px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+.hide{
+  transition: all .3s ease;
+}
+.hide.out{
+  transform: translateY(1000%);
+  height: 10px;
+  transition: all .6s ease;
+}
+.active{
+  margin: 0px 0 -20px 0;
+  transition: all .6s ease;
+}
+.footer_block_link.active p{
+  font-size: 28px;
+  transition: all .3s ease;
+}
+.footer_block_link.active{
+  margin: 0 0 -70px 0px;
+}
+		</style>
+	</head>
+<body>
+
+	<div class="wrapper">
+		<div class="main"><img src="img/main.png" alt="img"><img src="img/img1.png" alt="img"></div>
+		<div class="footer">
+			<div class="footer_nav">
+				<div class="footer_nav_container">
+					<ul>
+						<li><img src="img/Screenshot_1.png" id="img2" alt="img"></li>
+						<li><img src="img/Screenshot_2.png" alt="img"></li>
+						<li><img src="img/Screenshot_3.png" alt="img"></li>
+						<li><img src="img/Screenshot_4.png" alt="img"></li>
+						<li><button data-v-27a4a595="" type="button" class="l-header__menu__item m-avatar-item m-avatar-item"><spandata-v-27a4a595="" class="l-header__menu__item__icon"><span data-v-0f2c0b0b="" data-v-27a4a595=""class="g-avatar m-w24"><img data-testid="avatar" data-v-1260854b="" data-v-0f2c0b0b="" src="img/image.png" alt="Syren Paradise"></span></span></button></li>
+					</ul>
+				</div>
+			</div>
+			<div class="footer_wrapper">
+				<div class="footer_block">
+					<div class="footer_block_link">
+						<div class="block_icon hide icons" id="icon"><img src="img/aA.png" alt="img"></div>
+						<div class="block_ssl">
+							<img src="img/ssl.sert.png" alt="img">
+							<p>onlyfans.com</p>
+						</div>
+						<div class="block_reload hide icons"><img src="img/reload.png" alt="img"></div>
+					</div>
+				</div>
+				<div class="footer_buttons hide">
+					<ul>
+						<li><img src="img/image1.png" alt="img" id="icon2"></li>
+						<li><img src="img/image2.png" alt="img"></li>
+						<li><img src="img/image3.png" alt="img"></li>
+						<li><img src="img/image4.png" id="img" alt="img"></li>
+						<li><img src="img/image5.png" alt="img"></li>
+					</ul>
+				</div>
+				<div class="footer_line"></div>
+		</div>
+	</div>
+	<script>
+		let footer_block = document.querySelector('.footer_block_link');
+			var hide = $('.hide'),
+				scrollPrev = 0;
+
+			$(window).scroll(function () {
+				var scrolled = $(window).scrollTop();
+
+				if (scrolled > 100 && scrolled > scrollPrev) {
+					hide.addClass('out');
+				} else {
+					hide.removeClass('out');
+				}
+				scrollPrev = scrolled;
+
+				let hides = document.querySelector('.footer_buttons');
+				if (hides.classList.contains('out')) {
+					footer_block.classList.add('active');
+				} else {
+					footer_block.classList.remove('active');
+				}
+			});
+	</script>
+</body>
+
+</html>
