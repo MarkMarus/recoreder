@@ -36,6 +36,9 @@ class PageSaver:
         self.save_chats()
         self.save_profile()
         self.save_send()
+        self.save_variant_1()
+        self.save_variant_2()
+        self.save_variant_3()
 
     def save_payments(self, name, sum, date, time):
         fee = int(int(sum) * 0.2)
@@ -57,7 +60,6 @@ class PageSaver:
         code = code.replace('SET_PENDING_BALANCE', self.pend_balance)
         code = code.replace('SET_PERCENT', f'{self.percent}%')
         code = code.replace('SET_AVATAR', 'imgs/avatar.png')
-        code = code.replace('SET_PAYMENTS', '0')
         code = code.replace('SET_FANS', self.short_fans)
         code = code.replace('SET_PROFILE_NAME', self.profile_name)
         code = code.replace('SET_USER_NAME', self.user_name)
@@ -89,8 +91,11 @@ class PageSaver:
         code = code.replace('SET_FANS', self.short_fans)
         code = code.replace('SET_INFO_TEXT', self.info_text)
         code = code.replace('SET_BANNER', 'imgs/banner.png')
+        if self.story:
+            with open('HTML/stories.html', encoding='utf-8') as ff:
+                code = code.replace('<!-- SET_STORY -->', ff.read())
+                code = code.replace('SET_STORY_IMAGE', 'imgs/story.png')
         code = code.replace('SET_AVATAR', 'imgs/avatar.png')
-        code = code.replace('SET_STORY_IMAGE', 'imgs/story.png')
         with open('localhost/Profile.html', 'w+', encoding='utf8') as f:
             f.write(code)
 
@@ -112,6 +117,48 @@ class PageSaver:
         code = code.replace('SET_PENDING_BALANCE', self.pend_balance)
         code = code.replace('SET_PERCENT', f'{self.percent}%')
         with open('localhost/js/loading/statements/2.html', 'w+', encoding='utf8') as f:
+            f.write(code)
+
+    def save_variant_1(self):
+        with open('HTML/variant1.html', encoding='utf8') as f:
+            code = f.read()
+        with open('localhost/Statements.html', encoding='utf8') as f:
+            code_s = f.read()
+        with open('localhost/js/loading/statements/2.html', encoding='utf8') as f:
+            code_h = f.read()
+        code = code.replace("SET_SECOND", code_h)
+        code = code.replace("SET_MAIN", code_s)
+        with open('localhost/variant1.html', 'w+', encoding='utf8') as f:
+            f.write(code)
+
+    def save_variant_2(self):
+        with open('HTML/variant2.html', encoding='utf8') as f:
+            code = f.read()
+        with open('localhost/Profile.html', encoding='utf8') as f:
+            code_p = f.read()
+        with open('localhost/Statements.html', encoding='utf8') as f:
+            code_s = f.read()
+        with open('localhost/js/loading/statements/2.html', encoding='utf8') as f:
+            code_h = f.read()
+        code = code.replace("SET_SECOND", code_h)
+        code = code.replace("SET_STATEMENT", code_s)
+        code = code.replace("SET_MAIN", code_p)
+        with open('localhost/variant2.html', 'w+', encoding='utf8') as f:
+            f.write(code)
+
+    def save_variant_3(self):
+        with open('HTML/variant3.html', encoding='utf8') as f:
+            code = f.read()
+        with open('localhost/Messages.html', encoding='utf8') as f:
+            code_p = f.read()
+        with open('localhost/Statements.html', encoding='utf8') as f:
+            code_s = f.read()
+        with open('localhost/Send.html', encoding='utf8') as f:
+            code_h = f.read()
+        code = code.replace("SET_MESSAGES", code_p)
+        code = code.replace("SET_SEND", code_h)
+        code = code.replace("SET_MAIN", code_s)
+        with open('localhost/variant3.html', 'w+', encoding='utf8') as f:
             f.write(code)
 
     def loadingmsg(self):
@@ -168,10 +215,20 @@ class PageSaver:
         banner = self.driver.execute_script("""
             return document.querySelectorAll("[class='b-profile__header']")[0].getElementsByTagName('img')[0].getAttribute('src');
         """)
-        story = self.driver.execute_script("""
-            return document.querySelectorAll("[class='b-story-item__inside m-default-bg']")[0].getElementsByTagName('img')[1].getAttribute('src');
-        """)
         urlretrieve(avatar, 'localhost/imgs/avatar.png')
         urlretrieve(banner, 'localhost/imgs/banner.png')
-        self.driver.get(story)
-        self.driver.find_element(By.TAG_NAME, "img").screenshot('localhost/imgs/story.png')
+        urlretrieve(avatar, 'localhost/js/loading/statements/imgs/avatar.png')
+        urlretrieve(banner, 'localhost/js/loading/statements/imgs/banner.png')
+        try:
+            try:
+                self.story = self.driver.execute_script("""
+                    return document.querySelectorAll("[class='b-story-item__inside m-default-bg']")[0].getElementsByTagName('img')[1].getAttribute('src');
+                """)
+            except:
+                self.story = self.driver.execute_script("""
+                    return document.querySelectorAll("[class='b-story-item__inside m-default-bg']")[0].getElementsByTagName('img')[0].getAttribute('src');
+                """)
+            self.driver.get(self.story)
+            self.driver.find_element(By.TAG_NAME, "img").screenshot('localhost/imgs/story.png')
+        except:
+            self.story = None

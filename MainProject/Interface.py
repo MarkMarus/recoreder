@@ -1,11 +1,11 @@
 import sys
-import configparser
 import multiprocessing
-from PyQt5 import QtWidgets
+from PyQt6 import QtWidgets
 
 import UI.login_menu as lm
 import UI.profile_list as pl
 from DolphinAPI import DolphinAPI
+
 
 class LoginMenu(QtWidgets.QMainWindow, lm.Ui_MainWindow):
     def __init__(self):
@@ -15,8 +15,7 @@ class LoginMenu(QtWidgets.QMainWindow, lm.Ui_MainWindow):
         self.pushButton.clicked.connect(self.auth)
 
     def auth(self):
-        self.config = configparser.ConfigParser()
-        self.dolphin = DolphinAPI(self.config)
+        self.dolphin = DolphinAPI()
         if len(self.lineEdit.text()) == 0 and len(self.lineEdit_2.text()) == 0:
             resp = self.dolphin.auth()
         else:
@@ -25,7 +24,7 @@ class LoginMenu(QtWidgets.QMainWindow, lm.Ui_MainWindow):
         if not resp:
             return self.label.setStyleSheet("background-color: white;"
                                                  "color: grey;")
-        self.dolphin = DolphinAPI(self.config)
+        self.dolphin = DolphinAPI()
         log.close()
         self.plist = ProfileList(self.dolphin)
         return self.plist.show()
@@ -40,4 +39,5 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     log = LoginMenu()
     log.show()
-    sys.exit(app.exec_())
+    sys.exit(app.exec())
+    

@@ -29,3 +29,4 @@ class Worker:
         Thread(target=lambda: subprocess.call('python3 -m http.server 1233', shell=True)).start()
         time.sleep(5)
         WebRecorder(self.driver)
+        self.dolphin.stop_profile(profile_id)

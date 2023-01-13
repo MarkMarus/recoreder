@@ -1,11 +1,13 @@
 import json
 import requests
-from configparser import ConfigParser
+import config
+
 
 class DolphinAPI:
-    def __init__(self, config: ConfigParser):
-        self.config = config
-        self.config.read("app.conf")
+    def __init__(self):
+        self.email = config.EMAIL
+        self.password = config.PASSWORD
+        self.token = config.API_TOKEN
 
     def auth(self, username: str = None, password: str = None):
         # if not username and not password:
@@ -27,12 +29,12 @@ class DolphinAPI:
         return True
 
     def get_profiles(self) -> list:
-        headers = { "Authorization": f"Bearer {self.config['dolphin']['token']}" }
+        headers = { "Authorization": f"Bearer {self.token}" }
         profiles = requests.get('https://anty-api.com/browser_profiles', headers=headers).json()["data"]
         return profiles
 
     def get_proxies(self) -> list:
-        headers = { "Authorization": f"Bearer {self.config['dolphin']['token']}" }
+        headers = { "Authorization": f"Bearer {self.token}" }
         profiles = requests.get('https://anty-api.com/browser_profiles', headers=headers).json()["data"]
         return profiles
 
