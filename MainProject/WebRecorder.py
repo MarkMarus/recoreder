@@ -18,10 +18,11 @@ class WebRecorder:
         self.third_page()
 
     def first_page(self):
+        res = pyautogui.size()
         self.image()
         self.driver.get('http://localhost:1233/localhost/variant1.html')
         self.to_mobile()
-        Thread(target=lambda: subprocess.call('ffmpeg -f avfoundation -r 60 -t 22 -s 1366x768 -i "1" video1.mp4', shell=True)).start()
+        Thread(target=lambda: subprocess.call('ffmpeg -f avfoundation -r 60 -t 22 -s {res} -i "1" video1.mp4', shell=True)).start()
         time.sleep(5)
         pyautogui.moveTo(456,208)
         pyautogui.dragTo(456, 180, 0.1, button='left')
@@ -80,7 +81,8 @@ class WebRecorder:
             });
         """)
         time.sleep(15)
-        subprocess.call('ffmpeg -i video1.mp4 -vf "crop=619:1346:580:410" -c:v libx264 -crf 17 -c:a copy result1.mp4', shell=True)
+        subprocess.call('ffmpeg -i video1.mp4 -vf "crop=619:1346:580:410" -c:v libx264 -crf 17 -c:a copy cropped.mp4', shell=True)
+        subprocess.call('ffmpeg -i cropped.mp4 -vf "crop=619:1346:580:410" -c:v libx264 -crf 17 -c:a copy result1.mp4', shell=True)
         subprocess.call('ffmpeg -i result1.mp4 -i HTML/noback.png -filter_complex "[0:v][1:v] overlay=0:0" -c:a copy result/output1.mp4', shell=True)
         os.remove('result1.mp4')
         os.remove('video1.mp4')
