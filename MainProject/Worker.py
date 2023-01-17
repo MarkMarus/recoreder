@@ -24,7 +24,7 @@ class Worker:
         options.add_experimental_option("debuggerAddress", f"127.0.0.1:{port}")
         self.driver = webdriver.Chrome(service=Service('chromedriver.exe'), options=options)
         print('Браузер запущен')
-        self.driver.set_window_size(1920, 1080)
+        self.driver.set_window_size(1440, 900)
         PageSaver(self.driver, main_balance, fans, percent, pend_balance, profile_id)
         # self.dolphin.stop_profile(profile_id)
         Thread(target=lambda: subprocess.call('python3 -m http.server 1233', shell=True)).start()

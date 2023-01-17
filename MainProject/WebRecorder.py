@@ -18,15 +18,14 @@ class WebRecorder:
         self.third_page()
 
     def first_page(self):
-        res = pyautogui.size()
         self.image()
         self.driver.get('http://localhost:1233/localhost/variant1.html')
         self.to_mobile()
-        Thread(target=lambda: subprocess.call('ffmpeg -f avfoundation -r 60 -t 22 -s {res} -i "1" video1.mp4', shell=True)).start()
+        Thread(target=lambda: subprocess.call('ffmpeg -f avfoundation -r 60 -t 22 -i "1" video1.mp4', shell=True)).start()
         time.sleep(5)
-        pyautogui.moveTo(456,208)
-        pyautogui.dragTo(456, 180, 0.1, button='left')
-        pyautogui.moveTo(456,208)
+        pyautogui.moveTo(456,180)
+        pyautogui.dragTo(456, 198, 0.1, button='left')
+        pyautogui.moveTo(456,180)
         time.sleep(0.7)
         self.driver.execute_script("""
             window.scrollTo({
@@ -69,9 +68,9 @@ class WebRecorder:
             elem123456 = document.querySelectorAll("[id='style']")[0];
             elem123456.innerHTML = "#logo_loading { display: none; } #second_load { display: none; } #first_load {display: none; }";""")
         time.sleep(5)
-        pyautogui.moveTo(456,208)
-        pyautogui.dragTo(456, 180, 0.1, button='left')
-        pyautogui.moveTo(456,208)
+        pyautogui.moveTo(456,180)
+        pyautogui.dragTo(456, 198, 0.1, button='left')
+        pyautogui.moveTo(456,180)
         time.sleep(0.7)
         self.driver.execute_script("""
             window.scrollTo({
@@ -81,8 +80,7 @@ class WebRecorder:
             });
         """)
         time.sleep(15)
-        subprocess.call('ffmpeg -i video1.mp4 -vf "crop=619:1346:580:410" -c:v libx264 -crf 17 -c:a copy cropped.mp4', shell=True)
-        subprocess.call('ffmpeg -i cropped.mp4 -vf "crop=619:1346:580:410" -c:v libx264 -crf 17 -c:a copy result1.mp4', shell=True)
+        subprocess.call('ffmpeg -i video1.mp4 -vf "crop=619:1386:580:370" -c:v libx264 -crf 17 -c:a copy result1.mp4', shell=True)
         subprocess.call('ffmpeg -i result1.mp4 -i HTML/noback.png -filter_complex "[0:v][1:v] overlay=0:0" -c:a copy result/output1.mp4', shell=True)
         os.remove('result1.mp4')
         os.remove('video1.mp4')
@@ -90,11 +88,11 @@ class WebRecorder:
     def third_page(self):
         self.image()
         self.driver.get('http://localhost:1233/localhost/variant3.html')
-        Thread(target=lambda: subprocess.run('ffmpeg -f avfoundation -r 60 -t 30 -s 1366x768 -i "1"  video3.mp4', shell=True)).start()
+        Thread(target=lambda: subprocess.run('ffmpeg -f avfoundation -r 60 -t 30 -i "1"  video3.mp4', shell=True)).start()
         time.sleep(5)
-        pyautogui.moveTo(456,208)
-        pyautogui.dragTo(456, 180, 0.1, button='left')
-        pyautogui.moveTo(456,208)
+        pyautogui.moveTo(456,180)
+        pyautogui.dragTo(456, 198, 0.1, button='left')
+        pyautogui.moveTo(456,180)
         time.sleep(0.7)
         self.driver.execute_script("""
             window.scrollTo({
@@ -148,7 +146,7 @@ class WebRecorder:
             elem.className = "m-sidebar-visible m-prevent-scrolling";
         """)
         time.sleep(15)
-        subprocess.call('ffmpeg -i video3.mp4 -vf "crop=619:1346:580:410" -c:v libx264 -crf 17 -c:a copy result3.mp4', shell= True)
+        subprocess.call('ffmpeg -i video3.mp4 -vf "crop=619:1386:580:370" -c:v libx264 -crf 17 -c:a copy result3.mp4', shell= True)
         subprocess.call('ffmpeg -i result3.mp4 -i HTML/noback.png -filter_complex "[0:v][1:v] overlay=0:0" -c:a copy result/output3.mp4', shell=True)
         os.remove('result3.mp4')
         os.remove('video3.mp4')
@@ -156,7 +154,7 @@ class WebRecorder:
     def second_page(self):
         self.image()
         self.driver.get('http://localhost:1233/localhost/variant2.html')
-        Thread(target=lambda: subprocess.run('ffmpeg -f avfoundation -r 60 -t 30 -s 1366x768 -i "1" video2.mp4', shell=True)).start()
+        Thread(target=lambda: subprocess.run('ffmpeg -f avfoundation -r 60 -t 30 -i "1" video2.mp4', shell=True)).start()
         time.sleep(5)
         self.driver.execute_script("""
             window.scrollTo({
@@ -205,9 +203,9 @@ class WebRecorder:
             elem123.innerHTML = "#first_load { display: none; } #second_load { display: none; } #main_page { display: none; }";
         """)
         time.sleep(5)
-        pyautogui.moveTo(456,208)
-        pyautogui.dragTo(456, 180, 0.1, button='left')
-        pyautogui.moveTo(456,208)
+        pyautogui.moveTo(456,180)
+        pyautogui.dragTo(456, 198, 0.1, button='left')
+        pyautogui.moveTo(456,180)
         time.sleep(0.7)
         self.driver.execute_script("""
             window.scrollTo({
@@ -227,7 +225,7 @@ class WebRecorder:
             elem02.className = "p-list-chats";
         """)
         time.sleep(15)
-        subprocess.call('ffmpeg -i video2.mp4 -vf "crop=619:1346:580:410" -c:v libx264 -crf 17 -c:a copy result2.mp4', shell=True)
+        subprocess.call('ffmpeg -i video2.mp4 -vf "crop=619:1386:580:370" -c:v libx264 -crf 17 -c:a copy result2.mp4', shell=True)
         subprocess.call('ffmpeg -i result2.mp4 -i HTML/noback.png -filter_complex "[0:v][1:v] overlay=0:0" -c:a copy result/output2.mp4', shell=True)
         os.remove('result2.mp4')
         os.remove('video2.mp4')
@@ -236,7 +234,6 @@ class WebRecorder:
         time.sleep(5)
         pyautogui.press('F12')
         time.sleep(2)
-
         time.sleep(3)
         pyautogui.keyDown('command')
         pyautogui.keyDown('shift')
@@ -245,16 +242,16 @@ class WebRecorder:
         pyautogui.keyUp('command')
         pyautogui.keyUp('m')
         time.sleep(5)
-        pyautogui.moveTo(305, 145)
+        pyautogui.moveTo(305, 135)
         pyautogui.click()
         time.sleep(5)
-        pyautogui.moveTo(306, 251)
+        pyautogui.moveTo(306, 233)
         pyautogui.click()
         time.sleep(5)
-        pyautogui.moveTo(532, 145)
+        pyautogui.moveTo(532, 135)
         pyautogui.click()
         time.sleep(5)
-        pyautogui.moveTo(547, 312)
+        pyautogui.moveTo(547, 300)
         pyautogui.click()
         time.sleep(5)
         pyautogui.moveTo(100, 500)
@@ -263,5 +260,5 @@ class WebRecorder:
         with Image.open('noback.png') as img:
             I1 = ImageDraw.Draw(img)
             font = ImageFont.truetype('HTML/SFProDisplay-Regular.ttf', 21)
-            I1.text((60, 22), strftime("%H:%M"), font=font, fill=(255, 255, 255))
+            I1.text((65, 22), strftime("%H:%M"), font=font, fill=(255, 255, 255))
             img.save('HTML/noback.png')
