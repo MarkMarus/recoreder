@@ -4,6 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from urllib.request import urlretrieve
 import pandas as pd
+import ssl
 
 class PageSaver:
     def __init__(self, driver: webdriver, main_balance, fans, percent, pend_balance, profile_id):
@@ -184,6 +185,7 @@ class PageSaver:
 
     def get_profiles_info(self):
         self.driver.get("https://onlyfans.com")
+        ssl._create_default_https_context = ssl._create_unverified_context
         while True:    
             try:
                 self.driver.execute_script("""
