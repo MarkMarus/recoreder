@@ -41,6 +41,7 @@ class DolphinAPI:
     def start_profile(self, profile_id: str, headless=False) -> str:
         resp = requests.get(f"http://localhost:3001/v1.0/browser_profiles/{profile_id}/"
                             f"start?automation=1&headless={int(headless)}")
+        print(resp.content)
         if b"automation" not in resp.content:
             self.stop_profile(profile_id)
             port = self.start_profile(profile_id)

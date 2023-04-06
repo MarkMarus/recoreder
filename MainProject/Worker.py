@@ -7,6 +7,7 @@ from Edit import Edit
 import subprocess
 import time
 import pyautogui
+import os
 
 class Worker:
     def __init__(self, profile_id: str, dolphin):
@@ -16,15 +17,20 @@ class Worker:
             fans = info[2]
             percent = info[3]
             pend_balance = info[4]
+            follows = info[5]
         self.dolphin = dolphin
         port = self.dolphin.start_profile(profile_id, headless=False)
         options = webdriver.ChromeOptions()
         options.headless = False
         options.add_argument("--start--maximized")
         options.add_experimental_option("debuggerAddress", f"127.0.0.1:{port}")
-        self.driver = webdriver.Chrome(service=Service('chromedriver.exe'), options=options)
+        self.driver = webdriver.Chrome(service=Service('chromedriver/chromedriver_110'), options=options)
+        subprocess.run('chmod 555 chromedriver/chromedriver_110', shell=True)
+        ffmpeg_path = "ffmpeg/"  # replace this with your own FFmpeg executable path
+        os.environ["PATH"] += os.pathsep + os.path.dirname(ffmpeg_path)
+        subprocess.call(["ffmpeg", "-version"])
         print('Браузер запущен')
-        PageSaver(self.driver, main_balance, fans, percent, pend_balance, profile_id)
+        PageSaver(self.driver, main_balance, fans, percent, pend_balance, profile_id, follows)
         pyautogui.moveTo(30,700)
         time.sleep(1)
         pyautogui.click()

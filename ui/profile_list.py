@@ -80,7 +80,7 @@ class Ui_MainWindow(object):
             self.button.setFont(font)
             self.button.setText("Запуск")
             self.button.clicked.connect(lambda state, profile_id=str(profile["id"]): self.start(profile_id))
-            y += 48
+            y += 5
         self.scrollArea.setWidget(self.label)
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)

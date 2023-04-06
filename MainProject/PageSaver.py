@@ -1,5 +1,6 @@
 import re
 import time
+import pycountry
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from urllib.request import urlretrieve
@@ -7,7 +8,7 @@ import pandas as pd
 import ssl
 
 class PageSaver:
-    def __init__(self, driver: webdriver, main_balance, fans, percent, pend_balance, profile_id):
+    def __init__(self, driver: webdriver, main_balance, fans, percent, pend_balance, profile_id, follows):
         self.main_balance = main_balance
         self.fans = int(fans)
         if self.fans < 1000:
@@ -18,6 +19,14 @@ class PageSaver:
             if str(self.short_fans).endswith('.0'):
                 self.short_fans = int(self.short_fans)
             self.short_fans = f'{self.short_fans}K'
+        self.follows = int(follows)
+        if self.follows < 1000:
+            self.follows = str(self.follows)
+        else:
+            self.follows = round(self.follows/1000, 1)
+            if str(self.follows).endswith('.0'):
+                self.follows = int(self.follows)
+            self.follows = f'{self.follows}K'
         self.percent = percent
         self.pend_balance = pend_balance
         data = pd.read_csv('./data/transactions.csv')
@@ -42,8 +51,9 @@ class PageSaver:
         self.save_variant_3()
 
     def save_payments(self, name, sum, date, time):
-        fee = int(int(sum) * 0.2)
-        netto = int(int(sum) - fee)
+        fee = str(round(int(sum) * 0.2, 2)) + '0'
+        netto = str(round(int(sum) - float(fee), 2)) + '0'
+        sum = str(sum) + '.00'
         with open('HTML/Payment.html', encoding='utf8') as f:
             code = f.read()
         code = code.replace('SET_DATE', date)
@@ -64,6 +74,11 @@ class PageSaver:
         code = code.replace('SET_FANS', self.short_fans)
         code = code.replace('SET_PROFILE_NAME', self.profile_name)
         code = code.replace('SET_USER_NAME', self.user_name)
+        code = code.replace('SET_FOLLOWS', str(self.follows))
+        if self.home_value:
+            code = code.replace('<!--SET_HOME_VALUE-->', f'<span data-v-27a4a595="" class="l-header__menu__item__count"> {self.home_value} </span>')
+        if self.msg_value:
+            code = code.replace('<!--SET_MSG_VALUE-->', f'<span data-v-27a4a595="" class="l-header__menu__item__count"> {self.msg_value} </span>')
         for i in self.transactions:
             payment = self.save_payments(i[0], i[1], i[2], i[3])
             code = code.replace('<!--SET_PAYMENT-->', payment)
@@ -78,6 +93,10 @@ class PageSaver:
         code = code.replace('SET_FANS', self.short_fans)
         code = code.replace('SET_PROFILE_NAME', self.profile_name)
         code = code.replace('SET_USER_NAME', self.user_name)
+        if self.home_value:
+            code = code.replace('<!--SET_HOME_VALUE-->', f'<span data-v-27a4a595="" class="l-header__menu__item__count"> {self.home_value} </span>')
+        if self.msg_value:
+            code = code.replace('<!--SET_MSG_VALUE-->', f'<span data-v-27a4a595="" class="l-header__menu__item__count"> {self.msg_value} </span>')
         with open('localhost/Messages.html', 'w+', encoding='utf8') as f:
             f.write(code)
 
@@ -92,6 +111,11 @@ class PageSaver:
         code = code.replace('SET_FANS', self.short_fans)
         code = code.replace('SET_INFO_TEXT', self.info_text)
         code = code.replace('SET_BANNER', 'imgs/banner.png')
+        code = code.replace('SET_FOLLOWS', self.follows)
+        if self.home_value:
+            code = code.replace('<!--SET_HOME_VALUE-->', f'<span data-v-27a4a595="" class="l-header__menu__item__count"> {self.home_value} </span>')
+        if self.msg_value:
+            code = code.replace('<!--SET_MSG_VALUE-->', f'<span data-v-27a4a595="" class="l-header__menu__item__count"> {self.msg_value} </span>')
         if self.story:
             with open('HTML/stories.html', encoding='utf-8') as ff:
                 code = code.replace('<!-- SET_STORY -->', ff.read())
@@ -108,6 +132,11 @@ class PageSaver:
         code = code.replace('SET_FANS', self.short_fans)
         code = code.replace('SET_PROFILE_NAME', self.profile_name)
         code = code.replace('SET_USER_NAME', self.user_name)
+        code = code.replace('SET_FOLLOWS', self.follows)
+        if self.home_value:
+            code = code.replace('<!--SET_HOME_VALUE-->', f'<span data-v-27a4a595="" class="l-header__menu__item__count"> {self.home_value} </span>')
+        if self.msg_value:
+            code = code.replace('<!--SET_MSG_VALUE-->', f'<span data-v-27a4a595="" class="l-header__menu__item__count"> {self.msg_value} </span>')
         with open('localhost/Send.html', 'w+', encoding='utf8') as f:
             f.write(code)
 
@@ -117,6 +146,10 @@ class PageSaver:
         code = code.replace('SET_MAIN_BALANCE', self.main_balance)
         code = code.replace('SET_PENDING_BALANCE', self.pend_balance)
         code = code.replace('SET_PERCENT', f'{self.percent}%')
+        if self.home_value:
+            code = code.replace('<!--SET_HOME_VALUE-->', f'<span data-v-27a4a595="" class="l-header__menu__item__count"> {self.home_value} </span>')
+        if self.msg_value:
+            code = code.replace('<!--SET_MSG_VALUE-->', f'<span data-v-27a4a595="" class="l-header__menu__item__count"> {self.msg_value} </span>')
         with open('localhost/js/loading/statements/2.html', 'w+', encoding='utf8') as f:
             f.write(code)
 
@@ -129,6 +162,11 @@ class PageSaver:
             code_h = f.read()
         code = code.replace("SET_SECOND", code_h)
         code = code.replace("SET_MAIN", code_s)
+        code = code.replace('SET_PERCENT', f'{self.percent}%')
+        if self.home_value:
+            code = code.replace('<!--SET_HOME_VALUE-->', f'<span data-v-27a4a595="" class="l-header__menu__item__count"> {self.home_value} </span>')
+        if self.msg_value:
+            code = code.replace('<!--SET_MSG_VALUE-->', f'<span data-v-27a4a595="" class="l-header__menu__item__count"> {self.msg_value} </span>')
         with open('localhost/variant1.html', 'w+', encoding='utf8') as f:
             f.write(code)
 
@@ -144,6 +182,11 @@ class PageSaver:
         code = code.replace("SET_SECOND", code_h)
         code = code.replace("SET_STATEMENT", code_s)
         code = code.replace("SET_MAIN", code_p)
+        code = code.replace('SET_PERCENT', f'{self.percent}%')
+        if self.home_value:
+            code = code.replace('<!--SET_HOME_VALUE-->', f'<span data-v-27a4a595="" class="l-header__menu__item__count"> {self.home_value} </span>')
+        if self.msg_value:
+            code = code.replace('<!--SET_MSG_VALUE-->', f'<span data-v-27a4a595="" class="l-header__menu__item__count"> {self.msg_value} </span>')
         with open('localhost/variant2.html', 'w+', encoding='utf8') as f:
             f.write(code)
 
@@ -198,6 +241,12 @@ class PageSaver:
         self.profile_name = self.driver.execute_script("""
             return document.querySelectorAll("[class='b-username']")[0].textContent;
         """)
+        pattern = re.compile(r'[\U0001F1E6-\U0001F1FF]{2}')
+        for match in pattern.findall(self.profile_name):
+            country = pycountry.countries.get(alpha_2=match)
+            if country is not None:
+                flag = chr(ord(country.emoji_flag[0]) + 127397) + chr(ord(country.emoji_flag[1]) + 127397)
+                self.profile_name = self.profile_name.replace(match, flag)
         self.user_name = '@' + re.findall(".com/(.+)", self.driver.current_url)[0]
         self.posts_value = self.driver.execute_script("""
             return document.querySelectorAll("[class='b-profile__sections__count']")[0].textContent;
@@ -211,6 +260,20 @@ class PageSaver:
         self.info_text = self.driver.execute_script("""
             return document.querySelectorAll("[class='b-user-info__text m-break-word']")[0].innerHTML;
         """)
+        try:
+            self.home_value = int(self.driver.execute_script("""
+                return document.querySelectorAll('[class="l-header__menu__item__icon"]')[0];
+                return elem.querySelector('[class="l-header__menu__item__count"]').textContent;
+            """))
+        except:
+            self.home_value = 0
+        try:
+            self.msg_value = int(self.driver.execute_script("""
+                elem = document.querySelectorAll('[class="l-header__menu__item__icon"]')[3];
+                return elem.querySelector('[class="l-header__menu__item__count"]').textContent;
+            """))
+        except:
+            self.msg_value = 0
         avatar = self.driver.execute_script("""
             return document.querySelectorAll("[class='b-profile__header__user g-sides-gaps']")[0].getElementsByTagName('img')[0].getAttribute('src');
         """)

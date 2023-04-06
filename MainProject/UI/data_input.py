@@ -20,20 +20,22 @@ class Ui_MainWindow(object):
             profile_info = ''.join(line for line in info if self.profile_id in line)
             if not profile_info:
                 with open('./data/profiles_main.txt', 'a', encoding='utf8') as k:
-                    k.write(f'{self.profile_id} {0} {0} {0} {0}\n')
+                    k.write(f'{self.profile_id} {0} {0} {0} {0} {0}\n')
             if profile_info:
                 balance = profile_info.split(' ')[1]
                 fans = profile_info.split(' ')[2]
                 percent = profile_info.split(' ')[3]
                 pend = profile_info.split(' ')[4]
+                follows = profile_info.split(' ')[5]
             else:
                 balance = '0'
                 fans = '0'
                 percent = '0'
                 pend = '0'
+                follows = '0'
         MainWindow.setObjectName("MainWindow")
         MainWindow.setEnabled(True)
-        MainWindow.setFixedSize(354, 400)
+        MainWindow.setFixedSize(350, 430)
         MainWindow.setStyleSheet("QMainWindow {\n"
                                  "background: white;\n"
                                  "}\n"
@@ -102,8 +104,16 @@ class Ui_MainWindow(object):
         self.lineEdit_4 = QtWidgets.QLineEdit(self.centralwidget)
         self.lineEdit_4.setGeometry(QtCore.QRect(190, 130, 113, 21))
         self.lineEdit_4.setText(pend)
+        self.label_6 = QtWidgets.QLabel(self.centralwidget)
+        self.label_6.setFont(font)
+        self.label_6.setGeometry(QtCore.QRect(30, 280, 131, 16))
+        self.label_6.setStyleSheet("color: black;")
+        self.label_6.setText("Подписок")
+        self.lineEdit_5 = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit_5.setGeometry(QtCore.QRect(190, 280, 113, 21))
+        self.lineEdit_5.setText(follows)
         self.button = QtWidgets.QPushButton(self.centralwidget)
-        self.button.setGeometry(QtCore.QRect(40, 282, 261, 41))
+        self.button.setGeometry(QtCore.QRect(40, 350, 261, 41))
         self.button.setFont(font)
         self.button.clicked.connect(self.save)
         MainWindow.setCentralWidget(self.centralwidget)
@@ -132,7 +142,7 @@ class Ui_MainWindow(object):
             profile_info = line.split(' ')
             if profile_info[0] == self.profile_id:
                 info.remove(line)
-                profile_info = [self.profile_id, self.lineEdit.text(), self.lineEdit_2.text(), self.lineEdit_3.text(), self.lineEdit_4.text()]
+                profile_info = [self.profile_id, self.lineEdit.text(), self.lineEdit_2.text(), self.lineEdit_3.text(), self.lineEdit_4.text(), self.lineEdit_5.text()]
                 info.append(' '.join(profile_info))
                 break
         with open('./data/profiles_main.txt', 'w', encoding='utf8') as f:

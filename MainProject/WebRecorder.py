@@ -1,12 +1,17 @@
 import os
 import time
+import signal
 import pyautogui
 import subprocess
 from threading import Thread
 from selenium import webdriver
 from time import strftime
 from PIL import ImageFont, ImageDraw, Image
+import random
 
+
+# macbook air 13 - 646:1400:562:355
+# macbook pro - 646:1396:563:354
 
 class WebRecorder:
     def __init__(self, driver: webdriver):
@@ -17,11 +22,14 @@ class WebRecorder:
         time.sleep(5)
         self.third_page()
 
+    def run_localhost(self, number):
+        self.console = subprocess.Popen(f'ffmpeg -f avfoundation -r 60 -i "1" video{number}.mp4', stdout=subprocess.PIPE, shell=True)
+
     def first_page(self):
         self.image()
         self.driver.get('http://localhost:1233/localhost/variant1.html')
         self.to_mobile()
-        Thread(target=lambda: subprocess.call('ffmpeg -f avfoundation -r 60 -t 22 -i "1" video1.mp4', shell=True)).start()
+        Thread(target=lambda: self.run_localhost(1)).start()
         time.sleep(5)
         pyautogui.moveTo(456,180)
         pyautogui.dragTo(456, 198, 0.1, button='left')
@@ -54,19 +62,15 @@ class WebRecorder:
             elem01 = document.querySelectorAll("[data-testid='navstate']")[0];
             elem01.style = "";
             elem123 = document.querySelectorAll("[id='style']")[0];
-            elem123.innerHTML = "#first_load { display: none; } #second_load { display: none; } #main_page {display: none; }";""")
-        time.sleep(0.2)
+            elem123.innerHTML = "#first_load { display: none; } #main_page {display: none; }";""")
+        time.sleep(random.uniform(0.5, 1.5))
         self.driver.execute_script("""
             elem1234 = document.querySelectorAll("[id='style']")[0];
-            elem1234.innerHTML = "#logo_loading { display: none; } #second_load { display: none; } #main_page {display: none; }";""")
-        time.sleep(0.2)
-        self.driver.execute_script("""
-            elem12345 = document.querySelectorAll("[id='style']")[0];
-            elem12345.innerHTML = "#logo_loading { display: none; } #first_load { display: none; } #main_page {display: none; }";""")
-        time.sleep(0.2)
+            elem1234.innerHTML = "#logo_loading { display: none; } #main_page {display: none; }";""")
+        time.sleep(random.uniform(0.5, 1.5))
         self.driver.execute_script("""
             elem123456 = document.querySelectorAll("[id='style']")[0];
-            elem123456.innerHTML = "#logo_loading { display: none; } #second_load { display: none; } #first_load {display: none; }";""")
+            elem123456.innerHTML = "#logo_loading { display: none; } #first_load {display: none; }";""")
         time.sleep(5)
         pyautogui.moveTo(456,180)
         pyautogui.dragTo(456, 198, 0.1, button='left')
@@ -80,7 +84,9 @@ class WebRecorder:
             });
         """)
         time.sleep(15)
-        subprocess.call('ffmpeg -i video1.mp4 -vf "crop=619:1386:580:370" -c:v libx264 -crf 17 -c:a copy result1.mp4', shell=True)
+        self.console.send_signal(signal.SIGTERM)
+        time.sleep(5)
+        subprocess.call('ffmpeg -i video1.mp4 -vf "crop=646:1396:563:354" -crf 17 -c:a copy result1.mp4', shell=True)
         subprocess.call('ffmpeg -i result1.mp4 -i HTML/noback.png -filter_complex "[0:v][1:v] overlay=0:0" -c:a copy result/output1.mp4', shell=True)
         os.remove('result1.mp4')
         os.remove('video1.mp4')
@@ -88,7 +94,7 @@ class WebRecorder:
     def third_page(self):
         self.image()
         self.driver.get('http://localhost:1233/localhost/variant3.html')
-        Thread(target=lambda: subprocess.run('ffmpeg -f avfoundation -r 60 -t 30 -i "1"  video3.mp4', shell=True)).start()
+        Thread(target=lambda: self.run_localhost(3)).start()
         time.sleep(5)
         pyautogui.moveTo(456,180)
         pyautogui.dragTo(456, 198, 0.1, button='left')
@@ -123,7 +129,7 @@ class WebRecorder:
             elem001 = document.querySelectorAll("[id = 'style']")[0];
             elem001.innerHTML = "#main_page { display: none; } #send { display: none; } #messages {display: none; }";
         """)
-        time.sleep(0.3)
+        time.sleep(random.uniform(0.5, 1.5))
         self.driver.execute_script("""
             elem01 = document.querySelectorAll("[id = 'style']")[0];
             elem01.innerHTML = "#main_page { display: none; } #send { display: none; } #loading {display: none; }";
@@ -146,7 +152,9 @@ class WebRecorder:
             elem.className = "m-sidebar-visible m-prevent-scrolling";
         """)
         time.sleep(15)
-        subprocess.call('ffmpeg -i video3.mp4 -vf "crop=619:1386:580:370" -c:v libx264 -crf 17 -c:a copy result3.mp4', shell= True)
+        self.console.send_signal(signal.SIGTERM)
+        time.sleep(5)
+        subprocess.call('ffmpeg -i video3.mp4 -vf "crop=646:1396:563:354" -crf 17 -c:a copy result3.mp4', shell= True)
         subprocess.call('ffmpeg -i result3.mp4 -i HTML/noback.png -filter_complex "[0:v][1:v] overlay=0:0" -c:a copy result/output3.mp4', shell=True)
         os.remove('result3.mp4')
         os.remove('video3.mp4')
@@ -154,7 +162,7 @@ class WebRecorder:
     def second_page(self):
         self.image()
         self.driver.get('http://localhost:1233/localhost/variant2.html')
-        Thread(target=lambda: subprocess.run('ffmpeg -f avfoundation -r 60 -t 30 -i "1" video2.mp4', shell=True)).start()
+        Thread(target=lambda: self.run_localhost(2)).start()
         time.sleep(5)
         self.driver.execute_script("""
             window.scrollTo({
@@ -190,17 +198,12 @@ class WebRecorder:
         """)
         self.driver.execute_script("""
             elem1 = document.querySelectorAll("[id='style']")[0];
-            elem1.innerHTML = "#second_load { display: none; } #statement { display: none; } #main_page { display: none; }";
+            elem1.innerHTML = "#statement { display: none; } #main_page { display: none; }";
         """)
-        time.sleep(0.2)
-        self.driver.execute_script("""
-            elem12 = document.querySelectorAll("[id='style']")[0];
-            elem12.innerHTML = "#first_load { display: none; } #statement { display: none; } #main_page { display: none; }";
-        """)
-        time.sleep(0.2)
+        time.sleep(random.uniform(0.5, 1.5))
         self.driver.execute_script("""
             elem123 = document.querySelectorAll("[id='style']")[0];
-            elem123.innerHTML = "#first_load { display: none; } #second_load { display: none; } #main_page { display: none; }";
+            elem123.innerHTML = "#first_load { display: none; } #main_page { display: none; }";
         """)
         time.sleep(5)
         pyautogui.moveTo(456,180)
@@ -225,7 +228,9 @@ class WebRecorder:
             elem02.className = "p-list-chats";
         """)
         time.sleep(15)
-        subprocess.call('ffmpeg -i video2.mp4 -vf "crop=619:1386:580:370" -c:v libx264 -crf 17 -c:a copy result2.mp4', shell=True)
+        self.console.send_signal(signal.SIGTERM)
+        time.sleep(5)
+        subprocess.call('ffmpeg -i video2.mp4 -vf "crop=646:1396:563:354" -crf 17 -c:a copy result2.mp4', shell=True)
         subprocess.call('ffmpeg -i result2.mp4 -i HTML/noback.png -filter_complex "[0:v][1:v] overlay=0:0" -c:a copy result/output2.mp4', shell=True)
         os.remove('result2.mp4')
         os.remove('video2.mp4')
@@ -258,7 +263,31 @@ class WebRecorder:
 
     def image(self):
         with Image.open('noback.png') as img:
+            hours = ["01", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "21"]
+            hour = strftime("%H")
             I1 = ImageDraw.Draw(img)
-            font = ImageFont.truetype('HTML/SFProDisplay-Regular.ttf', 21)
-            I1.text((65, 22), strftime("%H:%M"), font=font, fill=(255, 255, 255))
-            img.save('HTML/noback.png')
+            font = ImageFont.truetype('HTML/SF-Pro-Display-Semibold.ttf', 22)
+            dot_font = ImageFont.truetype('HTML/SFProDisplay-Regular.ttf', 33)
+            if hour not in hours:
+                if strftime("%M").startswith("1"):
+                    I1.text((56, 23), hour, font=font, fill=(255, 255, 255))
+                    I1.text((81, 12), ".", font=dot_font, fill=(255, 255, 255))
+                    I1.text((81, 4), ".", font=dot_font, fill=(255, 255, 255))
+                    I1.text((90, 23), strftime("%M"), font=font, fill=(255, 255, 255))
+                else:
+                    I1.text((56, 23), hour, font=font, fill=(255, 255, 255))
+                    I1.text((81, 12), ".", font=dot_font, fill=(255, 255, 255))
+                    I1.text((81, 4), ".", font=dot_font, fill=(255, 255, 255))
+                    I1.text((90, 23), strftime("%M"), font=font, fill=(255, 255, 255))
+            elif hour == "11":
+                I1.text((57, 23), hour, font=font, fill=(255, 255, 255))
+                I1.text((77, 11), ".", font=dot_font, fill=(255, 255, 255))
+                I1.text((77, 3), ".", font=dot_font, fill=(255, 255, 255))
+                I1.text((87, 23), strftime("%M"), font=font, fill=(255, 255, 255))
+            else:
+                I1.text((57, 23), hour, font=font, fill=(255, 255, 255))
+                I1.text((80, 11), ".", font=dot_font, fill=(255, 255, 255))
+                I1.text((80, 3), ".", font=dot_font, fill=(255, 255, 255))
+                I1.text((89, 23), strftime("%M"), font=font, fill=(255, 255, 255))
+            img.save('HTML/noback2.png')
+            subprocess.call('ffmpeg -i HTML/noback.png -vf scale=646:1396:563:354 -y HTML/noback.png', shell=True)
